@@ -31,5 +31,10 @@ System.out.println(a6[0][1]);
 System.out.println(a6[1][0]);
 System.out.println(a6[1][1]);
 System.out.println(a6[1][2]);
+for(int x:a3)
+	{
+System.out.println(x+"a3");
+
+}
 }
 }
