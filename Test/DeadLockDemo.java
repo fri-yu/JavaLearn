@@ -30,7 +30,7 @@ class Ticket2 implements Runnable
 		while(count>0){
 			synchronized(obj)
 			{
-			method();
+				method();
 			}
 		}
 		}
