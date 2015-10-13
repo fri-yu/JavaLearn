@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<!-- METHOD -->
+	<package name="method" namespace="/met" extends="struts-default">
+
+		<action name="A" class="a.b.c.Method">
+			<result name="a">
+				/MethodA.jsp
+			</result>
+		</action>
+		<action name="B" class="a.b.c.Method" method="b">
+			<result name="b">
+				/MethodA.jsp
+			</result>
+		</action>
+	</package>
+	<!-- 通配符 -->
+	<package name="tp" namespace="/tp" extends="struts-default">
+
+		<action name="p_*">
+			<result>
+				/{1}.jsp<!-- 注意，一定加上反斜杠，否则路径不正确了 -->
+			</result>
+		</action>
+		<action name="m_*" class="a.b.c.{1}">
+			<result name="a">
+				/MethodA.jsp<!-- 注意，一定加上反斜杠，否则路径不正确了 -->
+			</result>
+		</action>
+		<action name="m2_*" class="a.b.c.Method" method="{1}">
+			<result name="{1}">
+				/{1}.jsp
+			</result>
+		</action>
+	</package>
+	<!-- 参数传递 -->
+	<package name="param" namespace="/pa" extends="struts-default">
+
+		<action name="A" class="a.b.c.RecParam" method="add">
+			<result name="a">
+				/index.jsp
+			</result>
+		</action>
+		<action name="*" class="a.b.c.RecParam{1}" method="add">
+			<result name="{1}">
+				/index.jsp
+			</result>
+		</action>
+
+	</package>
+	<!-- http 元素 -->
+	<package name="ht" namespace="/ht" extends="struts-default">
+		<action name="B" class="a.b.http.GetWebCell">
+			<result name="success">/htt.jsp</result>
+			<result name="b">/htt.jsp</result>
+		</action>
+	</package>
+	<package name="ognl" namespace="/og" extends="struts-default">
+		<action name="o" class="a.b.o.OGNLDemo">
+			<result>
+				/ognl.jsp
+			</result>
+
+		</action>
+	</package>
+</struts>

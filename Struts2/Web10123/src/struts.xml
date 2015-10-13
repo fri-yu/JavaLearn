@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<include file="ognl.xml" />
+	<!-- <constant name="struts.enable.DynamicMethodInvocation" value="false" 
+		/> <constant name="struts.devMode" value="true" /> <package name="default" 
+		namespace="/" extends="struts-default"> <default-action-ref name="index" 
+		/> <global-results> <result name="error">/error.jsp</result> </global-results> 
+		<global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+		result="error"/> </global-exception-mappings> <action name="index"> <result 
+		type="redirectAction"> <param name="actionName">HelloWorld</param> <param 
+		name="namespace">/example</param> </result> </action> </package> <include 
+		file="example.xml"/> -->
+	<!-- Add packages here -->
+	<constant name="struts.devMode" value="true" />
+	<package name="default" namespace="/de" extends="struts-default">
+
+		<action name="helloa">
+			<result>
+				/hello.jsp
+			</result>
+		</action>
+	</package>
+	 <!-- packeage namespace -->
+    <!-- /cc/helloa -》/hello2.jsp -->
+    <!-- /de/helloa -》/hello.jsp -->
+    <package name="aa" namespace="/cc" extends="struts-default">
+
+        <action name="helloa">
+            <result>
+                /hello2.jsp
+            </result>
+        </action>
+    </package>
+    <!-- NAMESPACE -->
+    <package name="de" extends="struts-default" namespace="">
+        <!-- <package name="de" extends="struts-default" namespace=""> -->
+
+        <action name="helloa">
+            <result>
+                /de.jsp
+            </result>
+        </action>
+    </package>
+    <!-- PATH -->
+    <package name="path" namespace="/path" extends="struts-default">
+
+        <action name="pathA">
+            <result>
+                /JSP/path.jsp
+            </result>
+        </action>
+    </package>
+</struts>
