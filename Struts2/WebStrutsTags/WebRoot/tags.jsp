@@ -103,7 +103,74 @@
 		<%=pageContext.getAttribute("agee2")%>
 		&nbsp;
 		<%=pageContext.getAttribute("agee3")%>
-		<s:debug></s:debug>
 	</p>
+	<ul>
+		<li>set 设定var，范围为session: <s:set var="adminPassword"
+				value="123456" scope="session" />
+		</li>
+		<li>set 使用#取值: <s:property value="#adminPassword" /></li>
+		<li>set 从相应范围取值: <s:property value="#session.adminPassword" /></li>
+		<li><%=session.getAttribute("adminPassword")%></li>
+	</ul>
+	<span>bean</span>
+	<ul>
+		<s:bean name="a.b.m.Dog" var="mydog">
+			<s:param name="name" value="'oudy'"></s:param>
+		</s:bean>
+		<li><s:property value="#mydog" />
+		</li>
+		<li><s:property value="#mydog.name" />
+		</li>
+	</ul>
+	<span>if elseif else</span>
+	<ul>
+
+		<li>age=<s:property value="#parameters.age" />
+		</li>
+		<!-- 		<li>age=<s:property value="#parameters.age[1]" /></li> -->
+		<li><s:if test="#parameters.age[0]>10"> >10</s:if>
+		</li>
+		<li><s:if test="#parameters.age[1]<10"> <10</s:if>
+		</li>
+		<li><s:if test="#parameters.age[1]<10"> <10</s:if>
+		</li>
+		<li><s:elseif test="#parameters.age[1]<30"> <30</s:elseif>
+		</li>
+		<li><s:else> ~~~~</s:else>
+		</li>
+		<li><s:if test="#parameters.ages==null">这个是null</s:if> <!-- 索引超出，并不会为null 也不会前台打出异常 #parameters.age[3] #parameters.ages[0]-->
+		</li>
+	</ul>
+	<span>遍历 iterator</span>
+	<ul>
+		<li><s:iterator value="#parameters.age" var="X">
+				<s:property value="#X" />|
+			</s:iterator></li>
+	</ul>
+	<hr />
+	<ul>
+		<li><s:iterator value="#{'m1':'map1','m2':'map2','m3':'map3'}"
+				var="mpt">
+				<s:property value="key" />
+
+			</s:iterator></li>
+	</ul>
+	<ul>
+		<li><s:iterator value="#{'m1':'map1','m2':'map2','m3':'map3'}"
+				var="mpt">
+				<s:property value="#mpt.key" />|<s:property value="#mpt.value" />
+				<br />
+			</s:iterator></li>
+		<s:debug></s:debug>
+	</ul>
+	<li><s:iterator value="#{1:'a', 2:'b', 3:'c'}">
+			<s:property value="key" /> | <s:property value="value" />
+			<br />
+		</s:iterator></li>
+	<li><s:iterator value="#{1:'a', 2:'b', 3:'c'}" var="mpt">
+			<s:property value="#mpt.key" /> | <s:property value="#mpt.value" />
+			<br />
+		</s:iterator></li>
+
 </body>
 </html>
