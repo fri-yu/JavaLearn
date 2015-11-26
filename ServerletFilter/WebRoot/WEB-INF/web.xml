@@ -28,6 +28,10 @@
 		<servlet-name>userDel</servlet-name>
 		<servlet-class>com.demo.bussiness.UserDel</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>jsonResult</servlet-name>
+		<servlet-class>com.demo.bussiness.JsonResult</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>hello_world</servlet-name>
 		<url-pattern>/hello</url-pattern>
@@ -47,6 +51,10 @@
 	<servlet-mapping>
 		<servlet-name>userDel</servlet-name>
 		<url-pattern>/userDel</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>jsonResult</servlet-name>
+		<url-pattern>/jsonResult</url-pattern>
 	</servlet-mapping>
 	<context-param>
 		<param-name>ss</param-name>
