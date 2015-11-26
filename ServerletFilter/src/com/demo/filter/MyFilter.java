@@ -23,9 +23,9 @@ public class MyFilter implements Filter {
 		// TODO Auto-generated method stub
 		System.out.println("filter run:"
 				+ ((HttpServletRequest) arg0).getRequestURL());
-		System.out.println("filter run:"
-				+ ((HttpServletRequest) arg0).getQueryString());
-		System.out.println(arg0.getCharacterEncoding());
+		/*System.out.println("filter run:"
+				+ ((HttpServletRequest) arg0).getQueryString());*/
+		/*System.out.println(arg0.getCharacterEncoding());*/
 		arg0.setCharacterEncoding("utf-8");
 		arg1.setCharacterEncoding("utf-8");
 		arg2.doFilter(arg0, arg1);

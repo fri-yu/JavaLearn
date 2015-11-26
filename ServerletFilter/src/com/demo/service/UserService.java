@@ -50,29 +50,21 @@ public class UserService extends BaseService {
 		return null;
 	}
 
-	public static List<User> GetUserList() {
-
+	public static int GetUserByPage(int pageSize,int currentPage, List<User> uList) {
+		System.out.println("service ulist hash:"+uList.hashCode());
 		Session session = HibernateUtil.openSession();
 		String hql = " from User ";
-		List<User> uList = session.createQuery(hql).list();
+		int rowCount=Integer.parseInt(session.createQuery(" select count(*) from User").uniqueResult().toString());
+		int pageCount=(rowCount-1)/pageSize+1;
+		//System.out.println(rowCount+","+pageCount+"-"+pageSize+"-"+currentPage);
+		 uList.addAll(session.createQuery(hql).setFirstResult((currentPage-1)*pageSize).setMaxResults(pageSize).list());
+		 System.out.println("service ulist hash:"+uList.hashCode());
 		try {
 			session.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return uList;
-	}
-	public static List<User> GetUserList(int pageSize,int currentPageNumber) {
-
-		Session session = HibernateUtil.openSession();
-		String hql = " from User ";
-		List<User> uList = session.createQuery(hql).setFirstResult((currentPageNumber-1)*pageSize).setMaxResults(pageSize).list();
-		try {
-			session.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return uList;
+		return pageCount;
 	}
 
 	public static void updateUser(User u) {

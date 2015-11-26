@@ -1,5 +1,7 @@
 package com.demo.viewModel;
+import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 
 import com.demo.domain.User;
 
@@ -8,6 +10,13 @@ public class WelComeModel {
 	private int pageSize;
 	private int pageCount;
 	private int currentPage;
+	private Map<String, String> pageLinkDic;
+	public Map<String, String> getPageLinkDic() {
+		return pageLinkDic;
+	}
+	public void setPageLinkDic(Map<String, String> pageLinkDic) {
+		this.pageLinkDic = pageLinkDic;
+	}
 	public List<User> getuList() {
 		return uList;
 	}
