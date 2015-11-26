@@ -62,6 +62,18 @@ public class UserService extends BaseService {
 		}
 		return uList;
 	}
+	public static List<User> GetUserList(int pageSize,int currentPageNumber) {
+
+		Session session = HibernateUtil.openSession();
+		String hql = " from User ";
+		List<User> uList = session.createQuery(hql).setFirstResult((currentPageNumber-1)*pageSize).setMaxResults(pageSize).list();
+		try {
+			session.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return uList;
+	}
 
 	public static void updateUser(User u) {
 		Session session = HibernateUtil.openSession();
