@@ -67,80 +67,88 @@ public class Welcome extends HttpServlet {
 				if (currentPage > 3)
 					model.getPageLinkDic().put("<-", "...");
 			}
-			if (currentPage < 3) {
-				model.getPageLinkDic().put(
-						"&pageSize=" + model.getPageSize() + "&currentPage=1",
-						"1");
-				model.getPageLinkDic().put(
-						"&pageSize=" + model.getPageSize() + "&currentPage=2",
-						"2");
-				model.getPageLinkDic().put(
-						"&pageSize=" + model.getPageSize() + "&currentPage=3",
-						"3");
-				model.getPageLinkDic().put(
-						"&pageSize=" + model.getPageSize() + "&currentPage=4",
-						"4");
-				model.getPageLinkDic().put(
-						"&pageSize=" + model.getPageSize() + "&currentPage=5",
-						"5");
-			} else {
-				if (currentPage < pageCount - 2) {
+			if (pageCount >= 5) {
+				if (currentPage < 3) {
 					model.getPageLinkDic().put(
-
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage="
-									+ (model.getCurrentPage() - 2),
-							model.getCurrentPage() - 2 + "");
+									+ "&currentPage=1", "1");
 					model.getPageLinkDic().put(
-
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage="
-									+ (model.getCurrentPage() - 1),
-							model.getCurrentPage() - 1 + "");
+									+ "&currentPage=2", "2");
 					model.getPageLinkDic().put(
-
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage="
-									+ (model.getCurrentPage()),
-							model.getCurrentPage() + "");
+									+ "&currentPage=3", "3");
 					model.getPageLinkDic().put(
-
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage="
-									+ (model.getCurrentPage() + 1),
-							model.getCurrentPage() + 1 + "");
+									+ "&currentPage=4", "4");
 					model.getPageLinkDic().put(
-
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage="
-									+ (model.getCurrentPage() + 2),
-							model.getCurrentPage() + 2 + "");
+									+ "&currentPage=5", "5");
 				} else {
-					model.getPageLinkDic().put(
+					if (currentPage < pageCount - 2) {
+						model.getPageLinkDic().put(
 
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=" + (pageCount - 4),
-							pageCount - 4 + "");
-					model.getPageLinkDic().put(
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage="
+										+ (model.getCurrentPage() - 2),
+								model.getCurrentPage() - 2 + "");
+						model.getPageLinkDic().put(
 
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=" + (pageCount - 3),
-							pageCount - 3 + "");
-					model.getPageLinkDic().put(
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage="
+										+ (model.getCurrentPage() - 1),
+								model.getCurrentPage() - 1 + "");
+						model.getPageLinkDic().put(
 
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=" + (pageCount - 2),
-							pageCount - 2 + "");
-					model.getPageLinkDic().put(
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage="
+										+ (model.getCurrentPage()),
+								model.getCurrentPage() + "");
+						model.getPageLinkDic().put(
 
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=" + (pageCount - 1),
-							pageCount - 1 + "");
-					model.getPageLinkDic().put(
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage="
+										+ (model.getCurrentPage() + 1),
+								model.getCurrentPage() + 1 + "");
+						model.getPageLinkDic().put(
 
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage="
+										+ (model.getCurrentPage() + 2),
+								model.getCurrentPage() + 2 + "");
+					} else {
+						model.getPageLinkDic().put(
+
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage=" + (pageCount - 4),
+								pageCount - 4 + "");
+						model.getPageLinkDic().put(
+
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage=" + (pageCount - 3),
+								pageCount - 3 + "");
+						model.getPageLinkDic().put(
+
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage=" + (pageCount - 2),
+								pageCount - 2 + "");
+						model.getPageLinkDic().put(
+
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage=" + (pageCount - 1),
+								pageCount - 1 + "");
+						model.getPageLinkDic().put(
+
+								"&pageSize=" + model.getPageSize()
+										+ "&currentPage=" + (pageCount),
+								pageCount + "");
+					}
+				}
+			} else {
+				for (int i = 0; i < pageCount; i++) {
+					model.getPageLinkDic().put(
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=" + (pageCount),
-							pageCount + "");
+									+ "&currentPage=" + (i + 1), (i + 1) + "");
 				}
 			}
 			if (pageCount > 5) {
