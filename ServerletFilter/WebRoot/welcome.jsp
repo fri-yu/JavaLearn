@@ -31,8 +31,8 @@
 </head>
 
 <body style='background-color:#E6E2EB;'>
-	<a href='userList'>用户列表</a>
-	<a>添加用户</a>
+	<!-- <a href='userList'>用户列表</a>
+	<a>添加用户</a> -->
 	<div class="row" style="width:98%;padding-top:120px;margin-right:auto;margin-left:auto;">
 		<div class="col-md-1"></div>
 		<div class="col-md-3">
