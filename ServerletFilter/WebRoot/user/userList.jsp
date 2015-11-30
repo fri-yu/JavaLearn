@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	WelComeModel model = (WelComeModel) request.getAttribute("model");
 %>
 <div class="table-responsive">
-	<table class="table table-striped">
+	<table class="table table-striped table-bordered">
 		<tr>
 			<td>姓名</td>
 			<td>年龄</td>
@@ -22,8 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 			<td><%=u.getName()%></td>
 			<td><%=u.getAge()%></td>
-			<td><a href='userEdit?cid=<%=u.getCid()%>'>编辑</a>| <a
-				href='userDel?cid=<%=u.getCid()%>' onclick="return del();">删除</a></td>
+			<td><a href='#' onclick="myLoad('userEdit?cid=<%=u.getCid()%>')">编辑</a>|
+				<a href='userDel?cid=<%=u.getCid()%>' onclick="return del();">删除</a>
+			</td>
 		</tr>
 		<%
 			}}
@@ -41,14 +42,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<a href="userList?<%=key%>"><%=model.getPageLinkDic().get(key)%></a>
 	<%
 		}
-		else
-		out.print( model.getCurrentPage());
-			}
-		else
-		{
-		out.print( model.getPageLinkDic().get(key));
-			}
-		}}
+			else
+			out.print( model.getCurrentPage());
+		}
+			else
+			{
+			out.print( model.getPageLinkDic().get(key));
+		}
+			}}
 	%>
 </div>
 <script type="text/javascript">
@@ -58,5 +59,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return true;
 		}
 		return false;
+	}
+	$("a").click(function(e) {
+		e.preventDefault();
+	});
+	function myLoad(url) {
+		loadDataByGet("<%=basePath%>"+url,"userList");
 	}
 </script>

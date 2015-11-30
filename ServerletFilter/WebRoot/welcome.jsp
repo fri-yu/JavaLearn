@@ -45,7 +45,7 @@
 		<div class="col-md-7">
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane fade in active" id="userList">
-					<p>W3Cschoool菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+					<p>用户列表页面</p>
 				</div>
 				<div class="tab-pane fade" id="addUser">
 					<p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和
