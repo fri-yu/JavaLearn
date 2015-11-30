@@ -11,33 +11,39 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<%
-		User user = (User) request.getAttribute("user");
-		if (user != null) {
-	%>
-	<form class="form-horizontal" action="userEdit" method="post">
-		<div class="form-group">
-			<label  class="col-sm-2 control-label">账号</label>
-			<div class="col-sm-10">
-				<input  class="form-control" id="inputEmail3"
-					placeholder="Email" name="uName" value='<%=user.getName()%>' />
-			</div>
+<%
+	User user = (User) request.getAttribute("user");
+	if (user != null) {
+%>
+<form class="form-horizontal" id="userEditForm">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">账号</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="inputEmail3" placeholder="Email"
+				name="uName" value='<%=user.getName()%>' />
 		</div>
-		<div class="form-group">
-			<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-			<div class="col-sm-10">
-				<input type="password" class="form-control" id="inputPassword3"
-					placeholder="Password" name="uPsd" value='<%=user.getPassword()%>' />
-				<input type="hidden" name="cid" value="<%=user.getCid()%>" />
-			</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="inputPassword3"
+				placeholder="Password" name="uPsd" value='<%=user.getPassword()%>' />
+			<input type="hidden" name="cid" value="<%=user.getCid()%>" />
 		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">保存</button>
-			</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="button" class="btn btn-default" onclick="myPost()">保存</button>
 		</div>
-	</form>
-	<%
-		}
-	%>
+	</div>
+</form>
+<%
+	}
+%>
+<script type="text/javascript">
+	function myPost() {
+		loadDataByPost("<%=basePath%>"+"userEdit","userList",serializeForm('userEditForm'));
+		
+	}
+</script>
 
