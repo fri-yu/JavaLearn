@@ -37,6 +37,7 @@ public class Welcome extends HttpServlet {
 				resp.sendRedirect("index.html?info=2");
 			}
 		} else {
+			System.out.println("ÕÊºÅ»òÃÜÂëÎª¿Õ");
 			resp.sendRedirect("index.html?info=1");
 		}
 	}
