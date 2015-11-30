@@ -42,7 +42,7 @@ public class UserList extends HttpServlet{
 	private WelComeModel initModel(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		WelComeModel model = new WelComeModel();
-		int pageSize = req.getParameter("pageSize") == null ? 10 : Integer
+		int pageSize = req.getParameter("pageSize") == null ? 5 : Integer
 				.parseInt(req.getParameter("pageSize").trim());// 默认每页10条
 		int currentPage = req.getParameter("currentPage") == null ? 1 : Integer
 				.parseInt(req.getParameter("currentPage").trim());// 默认第一页
