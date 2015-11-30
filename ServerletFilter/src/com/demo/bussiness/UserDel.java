@@ -30,13 +30,13 @@ public class UserDel extends HttpServlet {
 
 		if (null != cid) {
 			if (UserService.deleteUser(cid)) {
-				resp.sendRedirect("welcome");// 不能直接跳转“welcome.jsp”，因为没有对list进行赋值
+				resp.sendRedirect("userList");// 不能直接跳转“welcome.jsp”，因为没有对list进行赋值
 
 			} else {
-				resp.sendRedirect("welcome");// 不能直接跳转“welcome.jsp”，因为没有对list进行赋值
+				resp.sendRedirect("userList");// 不能直接跳转“welcome.jsp”，因为没有对list进行赋值
 			}
 		} else {
-			resp.sendRedirect("welcome");// 不能直接跳转“welcome.jsp”，因为没有对list进行赋值
+			resp.sendRedirect("userList");// 不能直接跳转“welcome.jsp”，因为没有对list进行赋值
 		}
 	}
 

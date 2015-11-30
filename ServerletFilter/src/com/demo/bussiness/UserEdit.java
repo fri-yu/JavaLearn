@@ -52,7 +52,7 @@ public class UserEdit extends HttpServlet {
 		System.out.println(req.getParameter("uName"));
 		System.out.println(req.getParameter("uPsd"));
 		UserService.updateUser(new User(Integer.parseInt(req.getParameter("cid")),req.getParameter("uName"),req.getParameter("uPsd")));
-		resp.sendRedirect("welcome?type=editSuccess");
+		resp.sendRedirect("userList?type=editSuccess");
 	}
 
 }
