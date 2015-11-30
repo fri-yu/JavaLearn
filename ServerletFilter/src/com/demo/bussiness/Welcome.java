@@ -23,9 +23,22 @@ public class Welcome extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//super.doGet(req, resp);
-		RequestDispatcher dispatcher=req.getRequestDispatcher("welcome.jsp");
-		dispatcher.forward(req, resp);
+		// super.doGet(req, resp);
+		String name = req.getParameter("username") == null ? "" : req
+				.getParameter("username").toString().trim();
+		String psd = req.getParameter("psd") == null ? "" : req.getParameter(
+				"psd").toString();
+		if (name != "" && psd != "") {
+			if (null != UserService.GetUser(name, psd)) {
+				RequestDispatcher dispatcher = req
+						.getRequestDispatcher("welcome.jsp");
+				dispatcher.forward(req, resp);
+			} else {
+				resp.sendRedirect("index.html?info=2");
+			}
+		} else {
+			resp.sendRedirect("index.html?info=1");
+		}
 	}
 
 	@Override
