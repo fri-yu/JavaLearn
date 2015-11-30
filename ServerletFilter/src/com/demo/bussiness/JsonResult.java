@@ -14,8 +14,9 @@ public class JsonResult extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		resp.setCharacterEncoding("gb2312");
 		PrintWriter pw = resp.getWriter();
-		pw.write("123");
+		pw.write("{\"Email\":\"zhww@outlook.com\",\"Remark\":\"我来自遥远的东方\"}");
 		pw.flush();
 		pw.close();
 	}
