@@ -40,7 +40,6 @@ public class UserEdit extends HttpServlet {
 		} else {
 			resp.sendRedirect("welcome");//不能直接跳转“welcome.jsp”，因为没有对list进行赋值
 		}
-
 	}
 
 	@Override

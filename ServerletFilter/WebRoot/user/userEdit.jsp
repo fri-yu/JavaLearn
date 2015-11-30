@@ -43,7 +43,6 @@
 <script type="text/javascript">
 	function myPost() {
 		loadDataByPost("<%=basePath%>"+"userEdit","userList",serializeForm('userEditForm'));
-		
 	}
 </script>
 
