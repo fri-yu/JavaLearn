@@ -23,66 +23,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td><%=u.getName()%></td>
 			<td><%=u.getAge()%></td>
 			<td><a href='#' onclick="myLoad('userEdit?cid=<%=u.getCid()%>')">编辑</a>|
-				<a href='userDel?cid=<%=u.getCid()%>' onclick="return del();">删除</a>
+				<a href='#' onclick="del('userDel?cid=<%=u.getCid()%>');">删除</a>
 			</td>
 		</tr>
 		<%
 			}}
 		%>
-
-		<%
-			if (model != null) {
-			for(String key :model.getPageLinkDic().keySet())
-			{
-			if(model.getPageLinkDic().get(key)!="..."){
-			if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
-			{
-		%>
 	</table>
-	<a href="userList?<%=key%>"><%=model.getPageLinkDic().get(key)%></a>
+	<%
+		if (model != null) {
+	%><nav>
+		<ul class="pagination">
+			<%
+				for(String key :model.getPageLinkDic().keySet())
+					{
+					if(model.getPageLinkDic().get(key)!="..."){
+					if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
+					{
+			%>
+			<li><a href="#" onclick="myPage('userList?<%=key%>')"><%=model.getPageLinkDic().get(key)%></a>
+			</li>
+			<%
+				}else {
+			%>
+			<li class='active'><a href="#"><%=model.getCurrentPage()%></a></li>
+			<%
+				}}
+					else
+					{
+			%>
+			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a></li>
+			<%
+				}
+					}
+			%>
+		</ul>
+	</nav>
 	<%
 		}
-			else
-			out.print( model.getCurrentPage());
-		}
-			else
-			{
-			out.print( model.getPageLinkDic().get(key));
-		}
-			}}
 	%>
-	<nav>
-  <ul class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li class='active'><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
 </div>
 <script type="text/javascript">
-	function del() {
+	function del(url) {
 		if (confirm("确定要删除数据吗？")) {
-			alert("确定");
-			return true;
+			loadDataByGet("<%=basePath%>"+url,"userList");
 		}
-		return false;
 	}
 	$("a").click(function(e) {
 		e.preventDefault();
 	});
 	function myLoad(url) {
-		loadDataByGet("<%=basePath%>"+url,"userList");
+		loadDataByGet("<%=basePath%>"+ url, "userList");
+	}
+	function myPage(url)
+	{
+	loadDataByGet("<%=basePath%>"+ url, "userList");
 	}
 </script>
