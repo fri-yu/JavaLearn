@@ -31,14 +31,20 @@ public class UserEdit extends HttpServlet {
 		if (null != cid) {
 			User user = UserService.GetUser(cid);
 			System.out.println(user);
-			if (user != null) {
-				req.setAttribute("user", user);
-				RequestDispatcher dispatcher = req
-						.getRequestDispatcher("/user/userEdit.jsp");
-				dispatcher.forward(req, resp);
+			if (user == null) {
+				user = new User();
+				user.setCid(-1);
+				user.setAge("");
+				user.setName("");
+				user.setPassword("");
 			}
+			req.setAttribute("user", user);
+			//System.out.println(user.getName()+"_"+user.getPassword());
+			RequestDispatcher dispatcher = req
+					.getRequestDispatcher("/user/userEdit.jsp");
+			dispatcher.forward(req, resp);
 		} else {
-			resp.sendRedirect("welcome");//不能直接跳转“welcome.jsp”，因为没有对list进行赋值
+			resp.sendRedirect("welcome");// 不能直接跳转“welcome.jsp”，因为没有对list进行赋值
 		}
 	}
 
@@ -46,11 +52,19 @@ public class UserEdit extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//this.doGet(req, resp);
-		System.out.println(req.getParameter("cid"));
+		// this.doGet(req, resp);
+		/*System.out.println(req.getParameter("cid"));
 		System.out.println(req.getParameter("uName"));
-		System.out.println(req.getParameter("uPsd"));
-		UserService.updateUser(new User(Integer.parseInt(req.getParameter("cid")),req.getParameter("uName"),req.getParameter("uPsd")));
+		System.out.println(req.getParameter("uPsd"));*/
+		if(!"-1".equals(req.getParameter("cid"))){
+		UserService.updateUser(new User(Integer.parseInt(req
+				.getParameter("cid")), req.getParameter("uName"), req
+				.getParameter("uPsd")));
+		}
+		else {
+			UserService.addUser(new User(0, req.getParameter("uName"),"age", req
+					.getParameter("uPsd")));
+		}
 		resp.sendRedirect("userList?type=editSuccess");
 	}
 
