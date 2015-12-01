@@ -111,6 +111,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function query(){
 	var params=serializeForm('queryForm');
 	//alert("<%=basePath%>"+ "userList?"+params);
-	loadDataByGet("<%=basePath%>"+ "userList?"+params, "userList");
+	loadDataByGet("<%=basePath%>"+ "userList?&"+params, "userList");
 	}
 </script>

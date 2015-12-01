@@ -46,6 +46,7 @@ public class UserList extends HttpServlet {
 		List<String> params = new ArrayList<String>();
 
 		WelComeModel model = new WelComeModel();
+		String queryString = req.getQueryString();
 		int pageSize = req.getParameter("pageSize") == null ? 5 : Integer
 				.parseInt(req.getParameter("pageSize").trim());// 默认每页10条
 		int currentPage = req.getParameter("currentPage") == null ? 1 : Integer
@@ -55,7 +56,7 @@ public class UserList extends HttpServlet {
 		System.out.println(queryName);
 		if (!"".equals(queryName)) {
 			sBuilder.append(" and name like ? ");
-			params.add("%" + queryName + "%");
+			params.add("%" + queryName + "%");// 这里注意hibernate的like用法！！！
 		}
 		if (req.getParameter("queryAge") != null
 				&& !"".equals(req.getParameter("queryAge").trim())) {
@@ -80,8 +81,8 @@ public class UserList extends HttpServlet {
 		// 设置分页
 		if (model.getPageCount() > 0) {
 			model.setPageLinkDic(new LinkedHashMap<String, String>());
-			model.getPageLinkDic().put("&pageSize=" + model.getPageSize() + "",
-					"首页");
+			model.getPageLinkDic().put(
+					"&pageSize=" + model.getPageSize() + queryString, "首页");
 			if (pageCount > 5) {
 				if (currentPage > 3)
 					model.getPageLinkDic().put("<-", "...");
@@ -90,84 +91,90 @@ public class UserList extends HttpServlet {
 				if (currentPage < 3) {
 					model.getPageLinkDic().put(
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=1", "1");
+									+ "&currentPage=1" + queryString, "1");
 					model.getPageLinkDic().put(
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=2", "2");
+									+ "&currentPage=2" + queryString, "2");
 					model.getPageLinkDic().put(
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=3", "3");
+									+ "&currentPage=3" + queryString, "3");
 					model.getPageLinkDic().put(
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=4", "4");
+									+ "&currentPage=4" + queryString, "4");
 					model.getPageLinkDic().put(
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=5", "5");
+									+ "&currentPage=5" + queryString, "5");
 				} else {
 					if (currentPage < pageCount - 2) {
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
 										+ "&currentPage="
-										+ (model.getCurrentPage() - 2),
+										+ (model.getCurrentPage() - 2)
+										+ queryString,
 								model.getCurrentPage() - 2 + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
 										+ "&currentPage="
-										+ (model.getCurrentPage() - 1),
+										+ (model.getCurrentPage() - 1)
+										+ queryString,
 								model.getCurrentPage() - 1 + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
 										+ "&currentPage="
-										+ (model.getCurrentPage()),
+										+ (model.getCurrentPage())
+										+ queryString,
 								model.getCurrentPage() + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
 										+ "&currentPage="
-										+ (model.getCurrentPage() + 1),
+										+ (model.getCurrentPage() + 1)
+										+ queryString,
 								model.getCurrentPage() + 1 + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
 										+ "&currentPage="
-										+ (model.getCurrentPage() + 2),
+										+ (model.getCurrentPage() + 2)
+										+ queryString,
 								model.getCurrentPage() + 2 + "");
 					} else {
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 4),
-								pageCount - 4 + "");
+										+ "&currentPage=" + (pageCount - 4)
+										+ queryString, pageCount - 4 + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 3),
-								pageCount - 3 + "");
+										+ "&currentPage=" + (pageCount - 3)
+										+ queryString, pageCount - 3 + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 2),
-								pageCount - 2 + "");
+										+ "&currentPage=" + (pageCount - 2)
+										+ queryString, pageCount - 2 + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 1),
-								pageCount - 1 + "");
+										+ "&currentPage=" + (pageCount - 1)
+										+ queryString, pageCount - 1 + "");
 						model.getPageLinkDic().put(
 
 								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount),
-								pageCount + "");
+										+ "&currentPage=" + (pageCount)
+										+ queryString, pageCount + "");
 					}
 				}
 			} else {
 				for (int i = 0; i < pageCount; i++) {
 					model.getPageLinkDic().put(
 							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=" + (i + 1), (i + 1) + "");
+									+ "&currentPage=" + (i + 1) + queryString,
+							(i + 1) + "");
 				}
 			}
 			if (pageCount > 5) {
@@ -178,7 +185,7 @@ public class UserList extends HttpServlet {
 			}
 			model.getPageLinkDic().put(
 					"&pageSize=" + model.getPageSize() + "&currentPage= "
-							+ model.getPageCount(), "尾页");
+							+ model.getPageCount() + queryString, "尾页");
 		}
 		return model;
 	}
