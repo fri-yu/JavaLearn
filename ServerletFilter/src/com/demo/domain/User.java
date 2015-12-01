@@ -40,6 +40,14 @@ public class User implements java.io.Serializable {
 
 	// Property accessors
 
+	public User(Integer cid, String name, String age, String password) {
+		super();
+		this.cid = cid;
+		this.name = name;
+		this.age = age;
+		this.password = password;
+	}
+
 	public Integer getCid() {
 		return this.cid;
 	}
