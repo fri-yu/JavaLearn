@@ -50,19 +50,27 @@ public class UserService extends BaseService {
 		return null;
 	}
 
-	public static int GetUserByPage(int pageSize,int currentPage, List<User> uList) {
-		System.out.println("service ulist hash:"+uList.hashCode());
+	public static int GetUserByPage(int pageSize, int currentPage,
+			List<User> uList) {
+		//System.out.println("service ulist hash:" + uList.hashCode());
 		Session session = HibernateUtil.openSession();
-		String hql = " from User ";
-		int rowCount=Integer.parseInt(session.createQuery(" select count(*) from User").uniqueResult().toString());
-		int pageCount=(rowCount-1)/pageSize+1;
-		//System.out.println(rowCount+","+pageCount+"-"+pageSize+"-"+currentPage);
-		 uList.addAll(session.createQuery(hql).setFirstResult((currentPage-1)*pageSize).setMaxResults(pageSize).list());
-		 System.out.println("service ulist hash:"+uList.hashCode());
+		String hql = " from User Order By cid desc ";
+		int rowCount = Integer.parseInt(session
+				.createQuery(" select count(*) from User").uniqueResult()
+				.toString());
+		int pageCount = (rowCount - 1) / pageSize + 1;
+		// System.out.println(rowCount+","+pageCount+"-"+pageSize+"-"+currentPage);
+		uList.addAll(session.createQuery(hql)
+				.setFirstResult((currentPage - 1) * pageSize)
+				.setMaxResults(pageSize).list());
+		//System.out.println("service ulist hash:" + uList.hashCode());
 		try {
 			session.close();
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+
+			closeSession(session);
 		}
 		return pageCount;
 	}
@@ -84,6 +92,8 @@ public class UserService extends BaseService {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
+		} finally {
+			closeSession(session);
 		}
 	}
 
@@ -103,7 +113,35 @@ public class UserService extends BaseService {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
+		} finally {
+
+			closeSession(session);
 		}
 		return false;
+	}
+
+	public static boolean addUser(User user) {
+		user.setCid(null);
+		Session session = HibernateUtil.openSession();
+
+		try {
+			Transaction transaction = session.beginTransaction();
+			session.save(user);
+			transaction.commit();
+			session.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		} finally {
+
+			closeSession(session);
+		}
+		return false;
+
+	}
+
+	private static void closeSession(Session session) {
+		if (session != null && session.isOpen())
+			session.close();
 	}
 }
