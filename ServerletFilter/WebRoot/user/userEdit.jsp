@@ -19,7 +19,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">账号</label>
 		<div class="col-sm-10">
-			<input class="form-control" id="inputEmail3" placeholder="Email"
+			<input class="form-control" id="inputEmail3" placeholder="账号"
 				name="uName" value='<%=user.getName()%>' />
 		</div>
 	</div>

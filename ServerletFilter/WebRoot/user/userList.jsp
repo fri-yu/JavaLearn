@@ -8,23 +8,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%
 	WelComeModel model = (WelComeModel) request.getAttribute("model");
 %>
-<form class="form-inline">
+<form class="form-inline" id="queryForm">
 	<div class="row">
 		<div class="col-md-3 text-center">
 			<div class="form-group">
 				<label for="inputName">姓名：</label> <input type="text"
-					class="form-control" id="inputName" placeholder="请输入姓名">
+					class="form-control" id="inputName" placeholder="请输入姓名" name="queryName">
 			</div>
 		</div>
 		<div class="col-md-3 text-center">
 			<div class="form-group">
 
 				<label for="inputAge">年龄：</label> <input type="text"
-					class="form-control" id="inputAge" placeholder="请输入年龄">
+					class="form-control" id="inputAge" placeholder="请输入年龄" name="queryAge">
 			</div>
 		</div>
 		<div class="col-md-1 text-center">
-			<button type="button" class="btn btn-default">查询</button>
+			<button type="button" class="btn btn-default" onclick="query()">查询</button>
 		</div>
 		<div class="col-md-1 text-center">
 			<button type="button" class="btn btn-default" onclick="addUser()">添加</button>
@@ -107,5 +107,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var url ="<%=basePath%>"+"userEdit?cid=-1";
 		loadDataByGet(url,"userList");
 			//$(ele).tab('show');
+	}
+	function query(){
+	var params=serializeForm('queryForm');
+	//alert("<%=basePath%>"+ "userList?"+params);
+	loadDataByGet("<%=basePath%>"+ "userList?"+params, "userList");
 	}
 </script>

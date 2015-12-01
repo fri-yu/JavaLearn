@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.demo.service.UserService;
 import com.demo.viewModel.WelComeModel;
 
-public class UserList extends HttpServlet{
+public class UserList extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,23 +35,45 @@ public class UserList extends HttpServlet{
 		// List<com.demo.domain.User> uList = UserService.GetUserList();
 		WelComeModel model = initModel(req);
 		req.setAttribute("model", model);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/userList.jsp");
+		RequestDispatcher dispatcher = req
+				.getRequestDispatcher("/user/userList.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	private WelComeModel initModel(HttpServletRequest req) {
 		// TODO Auto-generated method stub
+		StringBuilder sBuilder = new StringBuilder();
+		List<String> params = new ArrayList<String>();
+
 		WelComeModel model = new WelComeModel();
 		int pageSize = req.getParameter("pageSize") == null ? 5 : Integer
 				.parseInt(req.getParameter("pageSize").trim());// 默认每页10条
 		int currentPage = req.getParameter("currentPage") == null ? 1 : Integer
 				.parseInt(req.getParameter("currentPage").trim());// 默认第一页
-		List<com.demo.domain.User> uList = new ArrayList<com.demo.domain.User>();
-		int pageCount = UserService.GetUserByPage(pageSize, currentPage, uList);
+		String queryName = req.getParameter("queryName") == null ? "" : req
+				.getParameter("queryName").trim();
+		System.out.println(queryName);
+		if (!"".equals(queryName)) {
+			sBuilder.append(" and name like ? ");
+			params.add("%" + queryName + "%");
+		}
+		if (req.getParameter("queryAge") != null
+				&& !"".equals(req.getParameter("queryAge").trim())) {
+			int queryAge = Integer
+					.parseInt(req.getParameter("queryAge").trim());
+			sBuilder.append(" and age=? ");
+			params.add(queryAge + "");
+		}
+		sBuilder.append(" Order by cid desc ");
 
-		//System.out.println("bussiness ulist hash:" + uList.hashCode());
+		List<com.demo.domain.User> uList = new ArrayList<com.demo.domain.User>();
+		int pageCount = UserService.GetUserByPage(pageSize, currentPage, uList,
+				sBuilder.toString(), params);
+
+		// System.out.println("bussiness ulist hash:" + uList.hashCode());
 		model.setuList(uList);
-		//System.out.println(model.getuList().hashCode());
+
+		// System.out.println(model.getuList().hashCode());
 		model.setPageCount(pageCount);
 		model.setPageSize(pageSize);
 		model.setCurrentPage(currentPage);

@@ -2,6 +2,7 @@ package com.demo.service;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -11,10 +12,8 @@ import com.demo.util.HibernateUtil;
 public class UserService extends BaseService {
 	/**
 	 * @author Administrator
-	 * @param User
-	 *            Name
-	 * @param User
-	 *            Password
+	 * @param UserName
+	 * @param UserPassword
 	 * @return a user with the same name and password
 	 */
 	public static User GetUser(String name, String psd) {
@@ -34,6 +33,9 @@ public class UserService extends BaseService {
 		return null;
 	}
 
+	/**
+	 * 通过cID查询用户
+	 */
 	public static User GetUser(String cId) {
 		Session session = HibernateUtil.openSession();
 		String hql = " from User where cId=? ";
@@ -50,20 +52,41 @@ public class UserService extends BaseService {
 		return null;
 	}
 
+	/**
+	 * 获取总共有数据
+	 * 
+	 * @param pageSize
+	 * @param currentPage
+	 * @param uList
+	 * @return
+	 */
 	public static int GetUserByPage(int pageSize, int currentPage,
-			List<User> uList) {
-		//System.out.println("service ulist hash:" + uList.hashCode());
+			List<User> uList, String hql, List<String> paramS) {
+		// System.out.println("service ulist hash:" + uList.hashCode());
 		Session session = HibernateUtil.openSession();
-		String hql = " from User Order By cid desc ";
-		int rowCount = Integer.parseInt(session
-				.createQuery(" select count(*) from User").uniqueResult()
-				.toString());
+		Query queryCount = session.createQuery(" select count(*) from User where 1=1 "+hql);
+		if (paramS != null && paramS.size() > 0) {
+			for (int i = 0; i < paramS.size(); i++) {
+				queryCount.setParameter(i, paramS.get(i));
+			}
+		}
+		int rowCount = Integer.parseInt(queryCount.uniqueResult().toString());
 		int pageCount = (rowCount - 1) / pageSize + 1;
 		// System.out.println(rowCount+","+pageCount+"-"+pageSize+"-"+currentPage);
-		uList.addAll(session.createQuery(hql)
+		Query query = session.createQuery(" from User where 1=1 "+hql)
 				.setFirstResult((currentPage - 1) * pageSize)
-				.setMaxResults(pageSize).list());
-		//System.out.println("service ulist hash:" + uList.hashCode());
+				.setMaxResults(pageSize);
+		// System.out.println( paramS.size());
+		if (paramS != null && paramS.size() > 0) {
+			for (int i = 0; i < paramS.size(); i++) {
+				// System.out.println("params-------------------" +
+				// paramS.get(i));
+				query.setParameter(i, paramS.get(i));
+			}
+		}
+		// System.out.println("method run");
+		uList.addAll(query.list());
+		// System.out.println("service ulist hash:" + uList.hashCode());
 		try {
 			session.close();
 		} catch (Exception e) {
