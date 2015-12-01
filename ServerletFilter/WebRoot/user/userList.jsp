@@ -8,6 +8,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%
 	WelComeModel model = (WelComeModel) request.getAttribute("model");
 %>
+<form class="form-inline">
+	<div class="row">
+		<div class="col-md-3 text-center">
+			<div class="form-group">
+				<label for="inputName">姓名：</label> <input type="text"
+					class="form-control" id="inputName" placeholder="请输入姓名">
+			</div>
+		</div>
+		<div class="col-md-3 text-center">
+			<div class="form-group">
+
+				<label for="inputAge">年龄：</label> <input type="text"
+					class="form-control" id="inputAge" placeholder="请输入年龄">
+			</div>
+		</div>
+		<div class="col-md-1 text-center">
+			<button type="button" class="btn btn-default">查询</button>
+		</div>
+		<div class="col-md-1 text-center">
+			<button type="button" class="btn btn-default" onclick="addUser()">添加</button>
+		</div>
+	</div>
+</form>
 <div class="table-responsive">
 	<table class="table table-striped table-bordered">
 		<tr>
@@ -23,44 +46,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td><%=u.getName()%></td>
 			<td><%=u.getAge()%></td>
 			<td><a href='#' onclick="myLoad('userEdit?cid=<%=u.getCid()%>')">编辑</a>|
-				<a href='#' onclick="del('userDel?cid=<%=u.getCid()%>');">删除</a>
-			</td>
+				<a href='#' onclick="del('userDel?cid=<%=u.getCid()%>');">删除</a></td>
 		</tr>
 		<%
 			}}
 		%>
 	</table>
 	<%
-		if (model != null) {
+		/*--------------分页------------*/
+			if (model != null) {
 	%><nav>
 		<ul class="pagination">
 			<%
 				for(String key :model.getPageLinkDic().keySet())
-					{
-					if(model.getPageLinkDic().get(key)!="..."){
-					if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
-					{
+						{
+						if(model.getPageLinkDic().get(key)!="..."){
+						if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
+						{
 			%>
 			<li><a href="#" onclick="myPage('userList?<%=key%>')"><%=model.getPageLinkDic().get(key)%></a>
 			</li>
 			<%
 				}else {
 			%>
-			<li class='active'><a href="#"><%=model.getCurrentPage()%></a></li>
+			<li class='active'><a href="#"><%=model.getCurrentPage()%></a>
+			</li>
 			<%
 				}}
-					else
-					{
+						else
+						{
 			%>
-			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a></li>
+			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a>
+			</li>
 			<%
 				}
-					}
+						}
 			%>
 		</ul>
 	</nav>
 	<%
-		}
+		} /*--------------分页------------*/
 	%>
 </div>
 <script type="text/javascript">
@@ -75,8 +100,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function myLoad(url) {
 		loadDataByGet("<%=basePath%>"+ url, "userList");
 	}
-	function myPage(url)
-	{
-	loadDataByGet("<%=basePath%>"+ url, "userList");
+	function myPage(url){
+		loadDataByGet("<%=basePath%>" + url, "userList");
+	}
+	function addUser(){
+		var url ="<%=basePath%>"+"userEdit?cid=-1";
+		loadDataByGet(url,"userList");
+			//$(ele).tab('show');
 	}
 </script>
