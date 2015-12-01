@@ -49,9 +49,9 @@ public class UserList extends HttpServlet{
 		List<com.demo.domain.User> uList = new ArrayList<com.demo.domain.User>();
 		int pageCount = UserService.GetUserByPage(pageSize, currentPage, uList);
 
-		System.out.println("bussiness ulist hash:" + uList.hashCode());
+		//System.out.println("bussiness ulist hash:" + uList.hashCode());
 		model.setuList(uList);
-		System.out.println(model.getuList().hashCode());
+		//System.out.println(model.getuList().hashCode());
 		model.setPageCount(pageCount);
 		model.setPageSize(pageSize);
 		model.setCurrentPage(currentPage);
