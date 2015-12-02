@@ -21,6 +21,7 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="myeclipse.connection.profile">mySql</property>
 		<mapping resource="com/demo/domain/User.hbm.xml" />
+		<mapping resource="com/demo/domain/Paper.hbm.xml" />
 
 	</session-factory>
 

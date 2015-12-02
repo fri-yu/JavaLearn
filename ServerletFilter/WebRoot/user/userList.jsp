@@ -1,12 +1,12 @@
 <%@ page language="java"
-	import="java.util.*,com.demo.domain.User,com.demo.viewModel.WelComeModel"
+	import="java.util.*,com.demo.domain.User,com.demo.viewModel.UserListModel"
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
-	WelComeModel model = (WelComeModel) request.getAttribute("model");
+	UserListModel model = (UserListModel) request.getAttribute("model");
 %>
 <form class="form-inline" id="queryForm">
 	<div class="row">
@@ -113,4 +113,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//alert("<%=basePath%>"+ "userList?"+params);
 	loadDataByGet("<%=basePath%>"+ "userList?&"+params, "userList");
 	}
+	
 </script>

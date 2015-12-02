@@ -36,6 +36,10 @@
 		<servlet-name>jsonResult</servlet-name>
 		<servlet-class>com.demo.bussiness.JsonResult</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>paperList</servlet-name>
+		<servlet-class>com.demo.bussiness.PaperList</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>hello_world</servlet-name>
 		<url-pattern>/hello</url-pattern>
@@ -63,6 +67,10 @@
 	<servlet-mapping>
 		<servlet-name>jsonResult</servlet-name>
 		<url-pattern>/jsonResult</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>paperList</servlet-name>
+		<url-pattern>/paperList</url-pattern>
 	</servlet-mapping>
 	<context-param>
 		<param-name>ss</param-name>

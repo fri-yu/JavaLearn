@@ -3,15 +3,17 @@ function loadData(url, divId, method, data) {
 	$.ajax({
 		type : method,
 		url : url,
-		data : data,
+		data : null == data ? "" : data,
 		success : function(result) {
 			// alert(data);
 			$('#' + divId).html("");
+			// alert("#"+divId+" clear");
 			$('#' + divId).html(result);
 		}
 	});
 }
 function loadDataByGet(url, divId) {
+	// alert("loadDataByGet run");
 	loadData(url, divId, 'GET');
 }
 function loadDataByPost(url, divId, data) {
@@ -23,7 +25,6 @@ function getElements(formId) {
 	var tagElements = form.getElementsByTagName('input');
 	for ( var j = 0; j < tagElements.length; j++) {
 		elements.push(tagElements[j]);
-
 	}
 	return elements;
 }

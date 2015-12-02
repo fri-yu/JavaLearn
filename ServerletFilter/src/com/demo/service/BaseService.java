@@ -1,5 +1,5 @@
 package com.demo.service;
 
-public class BaseService {
+public interface BaseService {
 
 }

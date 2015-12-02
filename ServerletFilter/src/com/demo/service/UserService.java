@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 import com.demo.domain.User;
 import com.demo.util.HibernateUtil;
 
-public class UserService extends BaseService {
+public class UserService implements BaseService {
 	/**
 	 * @author Administrator
 	 * @param UserName
@@ -61,10 +61,10 @@ public class UserService extends BaseService {
 	 * @return
 	 */
 	public static int GetUserByPage(int pageSize, int currentPage,
-			List<User> uList, String hql, List<String> paramS) {
+			List<User> uList, String hqlWhere, List<String> paramS) {
 		// System.out.println("service ulist hash:" + uList.hashCode());
 		Session session = HibernateUtil.openSession();
-		Query queryCount = session.createQuery(" select count(*) from User where 1=1 "+hql);
+		Query queryCount = session.createQuery(" select count(*) from User where 1=1 "+hqlWhere);
 		if (paramS != null && paramS.size() > 0) {
 			for (int i = 0; i < paramS.size(); i++) {
 				queryCount.setParameter(i, paramS.get(i));
@@ -73,7 +73,7 @@ public class UserService extends BaseService {
 		int rowCount = Integer.parseInt(queryCount.uniqueResult().toString());
 		int pageCount = (rowCount - 1) / pageSize + 1;
 		// System.out.println(rowCount+","+pageCount+"-"+pageSize+"-"+currentPage);
-		Query query = session.createQuery(" from User where 1=1 "+hql)
+		Query query = session.createQuery(" from User where 1=1 "+hqlWhere)
 				.setFirstResult((currentPage - 1) * pageSize)
 				.setMaxResults(pageSize);
 		// System.out.println( paramS.size());

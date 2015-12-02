@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.demo.service.UserService;
-import com.demo.viewModel.WelComeModel;
+import com.demo.util.PagerUtil;
+import com.demo.viewModel.UserListModel;
 
 public class UserList extends HttpServlet {
 
@@ -33,30 +34,31 @@ public class UserList extends HttpServlet {
 		// pw.write("欢迎登录");
 
 		// List<com.demo.domain.User> uList = UserService.GetUserList();
-		WelComeModel model = initModel(req);
+		UserListModel model = initModel(req);
 		req.setAttribute("model", model);
 		RequestDispatcher dispatcher = req
 				.getRequestDispatcher("/user/userList.jsp");
 		dispatcher.forward(req, resp);
 	}
 
-	private WelComeModel initModel(HttpServletRequest req) {
+	private UserListModel initModel(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		StringBuilder sBuilder = new StringBuilder();
 		List<String> params = new ArrayList<String>();
 
-		WelComeModel model = new WelComeModel();
-		String queryString = req.getQueryString();
+		UserListModel model = new UserListModel();
 		int pageSize = req.getParameter("pageSize") == null ? 5 : Integer
 				.parseInt(req.getParameter("pageSize").trim());// 默认每页10条
 		int currentPage = req.getParameter("currentPage") == null ? 1 : Integer
 				.parseInt(req.getParameter("currentPage").trim());// 默认第一页
+		String queryString = "";
 		String queryName = req.getParameter("queryName") == null ? "" : req
 				.getParameter("queryName").trim();
-		System.out.println(queryName);
+		// System.out.println("queryString++++"+queryString);
 		if (!"".equals(queryName)) {
 			sBuilder.append(" and name like ? ");
 			params.add("%" + queryName + "%");// 这里注意hibernate的like用法！！！
+			queryString += "&queryName=" + queryName;
 		}
 		if (req.getParameter("queryAge") != null
 				&& !"".equals(req.getParameter("queryAge").trim())) {
@@ -64,6 +66,7 @@ public class UserList extends HttpServlet {
 					.parseInt(req.getParameter("queryAge").trim());
 			sBuilder.append(" and age=? ");
 			params.add(queryAge + "");
+			queryString += "&queryAge=" + queryAge;
 		}
 		sBuilder.append(" Order by cid desc ");
 
@@ -79,114 +82,9 @@ public class UserList extends HttpServlet {
 		model.setPageSize(pageSize);
 		model.setCurrentPage(currentPage);
 		// 设置分页
-		if (model.getPageCount() > 0) {
-			model.setPageLinkDic(new LinkedHashMap<String, String>());
-			model.getPageLinkDic().put(
-					"&pageSize=" + model.getPageSize() + queryString, "首页");
-			if (pageCount > 5) {
-				if (currentPage > 3)
-					model.getPageLinkDic().put("<-", "...");
-			}
-			if (pageCount >= 5) {
-				if (currentPage < 3) {
-					model.getPageLinkDic().put(
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=1" + queryString, "1");
-					model.getPageLinkDic().put(
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=2" + queryString, "2");
-					model.getPageLinkDic().put(
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=3" + queryString, "3");
-					model.getPageLinkDic().put(
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=4" + queryString, "4");
-					model.getPageLinkDic().put(
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=5" + queryString, "5");
-				} else {
-					if (currentPage < pageCount - 2) {
-						model.getPageLinkDic().put(
+		model.setPageLinkDic(PagerUtil.getPagerMap(model.getPageCount(),
+				model.getCurrentPage(), model.getPageSize(), queryString));
 
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage="
-										+ (model.getCurrentPage() - 2)
-										+ queryString,
-								model.getCurrentPage() - 2 + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage="
-										+ (model.getCurrentPage() - 1)
-										+ queryString,
-								model.getCurrentPage() - 1 + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage="
-										+ (model.getCurrentPage())
-										+ queryString,
-								model.getCurrentPage() + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage="
-										+ (model.getCurrentPage() + 1)
-										+ queryString,
-								model.getCurrentPage() + 1 + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage="
-										+ (model.getCurrentPage() + 2)
-										+ queryString,
-								model.getCurrentPage() + 2 + "");
-					} else {
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 4)
-										+ queryString, pageCount - 4 + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 3)
-										+ queryString, pageCount - 3 + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 2)
-										+ queryString, pageCount - 2 + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount - 1)
-										+ queryString, pageCount - 1 + "");
-						model.getPageLinkDic().put(
-
-								"&pageSize=" + model.getPageSize()
-										+ "&currentPage=" + (pageCount)
-										+ queryString, pageCount + "");
-					}
-				}
-			} else {
-				for (int i = 0; i < pageCount; i++) {
-					model.getPageLinkDic().put(
-							"&pageSize=" + model.getPageSize()
-									+ "&currentPage=" + (i + 1) + queryString,
-							(i + 1) + "");
-				}
-			}
-			if (pageCount > 5) {
-				System.out.println(pageCount + "-" + currentPage);
-				if (model.getPageCount() - model.getCurrentPage() > 2) {
-					model.getPageLinkDic().put("->", "...");
-				}
-			}
-			model.getPageLinkDic().put(
-					"&pageSize=" + model.getPageSize() + "&currentPage= "
-							+ model.getPageCount() + queryString, "尾页");
-		}
 		return model;
 	}
 }

@@ -16,7 +16,8 @@ public class JsonResult extends HttpServlet {
 		// TODO Auto-generated method stub
 		resp.setCharacterEncoding("gb2312");
 		PrintWriter pw = resp.getWriter();
-		pw.write("{\"Email\":\"zhww@outlook.com\",\"Remark\":\"我来自遥远的东方\"}");
+		//pw.write("{\"Email\":\"zhww@outlook.com\",\"Remark\":\"我来自遥远的东方\"}");
+		pw.write("callback('123')");
 		pw.flush();
 		pw.close();
 	}
