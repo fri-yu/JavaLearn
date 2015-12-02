@@ -58,7 +58,7 @@
 	</div>
 	<script>
 		$(function() {
-			$('#myTab a:last').tab('show');
+			$('#myTab a:first').tab('show');
 			$('#myTab a').click(function(e) {
 				e.preventDefault();//阻止a链接的跳转行为
 				//
