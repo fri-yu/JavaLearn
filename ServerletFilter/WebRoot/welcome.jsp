@@ -43,7 +43,7 @@
 				<li><a href="#paperList" name="paperList"
 					onclick="loadDiv(this)">试卷列表</a></li>
 				<li><a href="#questionList" name="questionList"
-					onclick="loadDiv(this)">试题列表</a></li>
+					onclick="loadDiv(this,'questionType=Choice')">试题列表</a></li>
 			</ul>
 		</div>
 		<div class="col-md-7">
@@ -72,7 +72,7 @@
 			})
 		})
 		function loadDiv(ele,paras) {
-		var url ="<%=basePath%>" + ele.name;
+			var url ="<%=basePath%>" + ele.name;
 			if (paras != undefined)
 				url += "?" + paras;
 			//alert(ele.name);
