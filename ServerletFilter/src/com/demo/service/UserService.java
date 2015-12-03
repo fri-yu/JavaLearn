@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 import com.demo.domain.User;
 import com.demo.util.HibernateUtil;
 
-public class UserService implements BaseService {
+public class UserService extends BaseService {
 	/**
 	 * @author Administrator
 	 * @param UserName

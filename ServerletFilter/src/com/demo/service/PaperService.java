@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import com.demo.domain.User;
 import com.demo.util.HibernateUtil;
 
-public class PaperService implements BaseService {
+public class PaperService extends BaseService {
 	public static int getList(int pageSize, int currentPage, List modelList,
 			String tableName, String hqlWhere, List<String> params) {
 		Session session = HibernateUtil.openSession();
