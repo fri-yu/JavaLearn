@@ -5,6 +5,10 @@ import java.util.regex.Pattern;
 
 import org.hibernate.Session;
 
+import sun.launcher.resources.launcher;
+
+import com.demo.domain.*;
+import com.demo.util.DifficultyPoint;
 import com.demo.util.HibernateUtil;
 
 public class Test {
@@ -14,7 +18,25 @@ public class Test {
 		// List<String> arr=new ArrayList<String>();
 		// method(arr);
 		// System.out.println(arr.hashCode());
-		MyRegex_3("");
+		// MyRegex_3("");
+		Session session = HibernateUtil.getCurrentSession();
+		QuestionChoice cq = new QuestionChoice();
+		//cq.setHiloId(234);
+		cq.setContent("哪个不是编译型语言");
+		cq.setOptionA("java");
+		cq.setOptionB("C#");
+		cq.setOptionC("C++");
+		cq.setOptionD("JavaScript");
+		cq.setAnswer("D");
+		cq.setDifficultyPonit(DifficultyPoint.Point9.getPoint());
+		session.beginTransaction();
+		session.save(cq);
+		QuestionCompletion qc=new QuestionCompletion();
+		qc.setContent(".NET不用主动释放内存是因为()");
+		qc.setAnswer("GC|垃圾回收机制");
+		qc.setDifficultyPonit(DifficultyPoint.Point8.getPoint());
+		session.save(qc);
+		session.getTransaction().commit();
 	}
 
 	static void method(List<String> arr) {
@@ -29,9 +51,8 @@ public class Test {
 				.matcher("myPage('userList?&pageSize=5&currentPage= 4");
 		// 替换第一个符合正则的数据
 		String string = matcher.replaceAll("");
-		 pattern = Pattern.compile("&currentPage=[/s]?[0-9]?");
-		 matcher = pattern
-				.matcher(string);
+		pattern = Pattern.compile("&currentPage=[/s]?[0-9]?");
+		matcher = pattern.matcher(string);
 		// 替换第一个符合正则的数据
 		string = matcher.replaceAll("");
 		System.out.println(string);

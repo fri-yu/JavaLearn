@@ -38,10 +38,12 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-3">
 			<ul id="myTab" class="nav nav-tabs  nav-stacked">
-				<li class="active"><a href="#userList" name="userList" onclick="loadDiv(this)">用户列表</a>
-				</li>
-				<li><a href="#paperList" name="paperList" onclick="loadDiv(this)">试卷列表</a>
-				</li>
+				<li class="active"><a href="#userList" name="userList"
+					onclick="loadDiv(this)">用户列表</a></li>
+				<li><a href="#paperList" name="paperList"
+					onclick="loadDiv(this)">试卷列表</a></li>
+				<li><a href="#questionList" name="questionList"
+					onclick="loadDiv(this)">试题列表</a></li>
 			</ul>
 		</div>
 		<div class="col-md-7">
@@ -50,6 +52,9 @@
 					<p>用户列表页面</p>
 				</div>
 				<div class="tab-pane fade" id="paperList">
+					<p>试卷列表页</p>
+				</div>
+				<div class="tab-pane fade" id="questionList">
 					<p>试题列表页</p>
 				</div>
 			</div>
@@ -67,8 +72,11 @@
 			})
 		})
 		function loadDiv(ele,paras) {
-			var url ="<%=basePath%>" + ele.name+"?"+paras;
+		var url ="<%=basePath%>" + ele.name;
+			if (paras != undefined)
+				url += "?" + paras;
 			//alert(ele.name);
+			//alert(url);
 			loadDataByGet(url, ele.name);
 			$(ele).tab('show');//显示当前选中的链接及关联的content 
 		}
