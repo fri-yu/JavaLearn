@@ -2,6 +2,7 @@ package com.demo.bussiness;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ public class QuestionList extends HttpServlet {
 		// TODO Auto-generated method stub
 		// super.doGet(req, resp);
 		req.setAttribute("model", initModel(req));
+		RequestDispatcher dispatcher=req.getRequestDispatcher("/question/questionList.jsp");
+		dispatcher.forward(req, resp);
 	}
 
 	@Override

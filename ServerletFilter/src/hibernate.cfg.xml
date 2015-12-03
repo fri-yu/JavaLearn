@@ -20,13 +20,16 @@
 		</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="myeclipse.connection.profile">mySql</property>
-		 <property name="hibernate.hbm2ddl.auto">update</property> 
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<mapping resource="com/demo/domain/User.hbm.xml" />
 		<mapping resource="com/demo/domain/Paper.hbm.xml" />
 		<mapping resource="com/demo/domain/QuestionChoice.hbm.xml" />
 		<mapping resource="com/demo/domain/QuestionCompletion.hbm.xml" />
 		<mapping resource="com/demo/domain/QuestionShortanswer.hbm.xml" />
 		<mapping resource="com/demo/domain/QuestionTrueorfalse.hbm.xml" />
+		<mapping resource="com/demo/domain/Question.hbm.xml" />
+		<mapping
+			resource="com/demo/domain/QuestionrsShortanswer.hbm.xml" />
 
 	</session-factory>
 

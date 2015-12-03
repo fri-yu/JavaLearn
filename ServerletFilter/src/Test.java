@@ -8,7 +8,8 @@ import org.hibernate.Session;
 import sun.launcher.resources.launcher;
 
 import com.demo.domain.*;
-import com.demo.util.DifficultyPoint;
+import com.demo.util.EDifficultyPoint;
+import com.demo.util.EQuestionType;
 import com.demo.util.HibernateUtil;
 
 public class Test {
@@ -19,6 +20,15 @@ public class Test {
 		// method(arr);
 		// System.out.println(arr.hashCode());
 		// MyRegex_3("");
+		//AddData();
+		for(EQuestionType st:EQuestionType.values())
+		{
+			System.out.println(st.getValue());
+			
+		}
+	}
+
+	private static void AddData() {
 		Session session = HibernateUtil.getCurrentSession();
 		QuestionChoice cq = new QuestionChoice();
 		//cq.setHiloId(234);
@@ -28,13 +38,13 @@ public class Test {
 		cq.setOptionC("C++");
 		cq.setOptionD("JavaScript");
 		cq.setAnswer("D");
-		cq.setDifficultyPonit(DifficultyPoint.Point9.getPoint());
+		cq.setDifficultyPonit(EDifficultyPoint.Point9.getValue());
 		session.beginTransaction();
 		session.save(cq);
 		QuestionCompletion qc=new QuestionCompletion();
 		qc.setContent(".NET不用主动释放内存是因为()");
 		qc.setAnswer("GC|垃圾回收机制");
-		qc.setDifficultyPonit(DifficultyPoint.Point8.getPoint());
+		qc.setDifficultyPonit(EDifficultyPoint.Point8.getValue());
 		session.save(qc);
 		session.getTransaction().commit();
 	}
