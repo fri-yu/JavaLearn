@@ -5,15 +5,19 @@ function loadData(url, divId, method, data) {
 		url : url,
 		data : null == data ? "" : data,
 		success : function(result) {
-			// alert(data);
+			 //alert(result);
 			$('#' + divId).html("");
 			// alert("#"+divId+" clear");
 			$('#' + divId).html(result);
+		},
+	error:function()
+		{
+		alert("ajax error");
 		}
 	});
 }
 function loadDataByGet(url, divId) {
-	// alert("loadDataByGet run");
+	 //alert("loadDataByGet run");
 	loadData(url, divId, 'GET');
 }
 function loadDataByPost(url, divId, data) {
