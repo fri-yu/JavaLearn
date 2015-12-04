@@ -1,67 +1,53 @@
 package com.demo.domain;
 
-
-
 /**
  * QuestionShortanswer entity. @author MyEclipse Persistence Tools
  */
 
-public class QuestionShortanswer  implements java.io.Serializable {
+public class QuestionShortanswer implements java.io.Serializable {
 
+	// Fields
 
-    // Fields    
+	private Integer hiloId;
+	private String content;
+	private String difficultyPoint;
 
-     private Integer hiloId;
-     private String content;
-     private String difficultyPonit;
+	// Constructors
 
+	/** default constructor */
+	public QuestionShortanswer() {
+	}
 
-    // Constructors
+	/** full constructor */
+	public QuestionShortanswer(String content, String difficultyPoint) {
+		this.content = content;
+		this.difficultyPoint = difficultyPoint;
+	}
 
-    /** default constructor */
-    public QuestionShortanswer() {
-    }
+	// Property accessors
 
-    
-    /** full constructor */
-    public QuestionShortanswer(String content, String difficultyPonit) {
-        this.content = content;
-        this.difficultyPonit = difficultyPonit;
-    }
+	public Integer getHiloId() {
+		return this.hiloId;
+	}
 
-   
-    // Property accessors
+	public void setHiloId(Integer hiloId) {
+		this.hiloId = hiloId;
+	}
 
-    public Integer getHiloId() {
-        return this.hiloId;
-    }
-    
-    public void setHiloId(Integer hiloId) {
-        this.hiloId = hiloId;
-    }
+	public String getContent() {
+		return this.content;
+	}
 
-    public String getContent() {
-        return this.content;
-    }
-    
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public String getDifficultyPonit() {
-        return this.difficultyPonit;
-    }
-    
-    public void setDifficultyPonit(String difficultyPonit) {
-        this.difficultyPonit = difficultyPonit;
-    }
-   
+	public String getDifficultyPoint() {
+		return this.difficultyPoint;
+	}
 
-
-
-
-
-
-
+	public void setDifficultyPoint(String difficultyPoint) {
+		this.difficultyPoint = difficultyPoint;
+	}
 
 }

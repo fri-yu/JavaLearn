@@ -22,8 +22,8 @@
 				<comment>答案</comment>
 			</column>
 		</property>
-		<property name="difficultyPonit" type="java.lang.String">
-			<column name="difficultyPonit" not-null="true">
+		<property name="difficultyPoint" type="java.lang.String">
+			<column name="difficultyPoint" not-null="true">
 				<comment>难度系数</comment>
 			</column>
 		</property>
