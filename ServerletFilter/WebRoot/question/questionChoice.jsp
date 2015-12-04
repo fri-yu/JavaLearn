@@ -13,7 +13,6 @@
 			.getAttribute("model");
 	List<QuestionChoice> cList = model.getqCList();
 %>
-
 <div class="table-responsive">
 	<table class="table table-striped table-bordered">
 		<tr>
@@ -27,9 +26,9 @@
 		%>
 		<tr>
 			<td><%=q.getContent()%></td>
-			<td><%=q.getDifficultyPonit()%></td>
-			<td><a href='#' onclick="myLoad('userEdit?cid=<%=q.getHiloId()%>')">编辑</a>|
-				<a href='#' onclick="del('userDel?cid=<%=q.getHiloId()%>');">删除</a>
+			<td><%=q.getDifficultyPoint()%></td>
+			<td><a href='#' onclick="">编辑</a>|
+				<a href='#' onclick="">删除</a>
 			</td>
 		</tr>
 		<%
@@ -38,3 +37,38 @@
 		%>
 	</table>
 </div>
+<%
+		/*--------------分页------------*/
+			if (model != null) {
+	%><nav>
+		<ul class="pagination">
+			<%
+				for(String key :model.getPageLinkDic().keySet())
+						{
+						if(model.getPageLinkDic().get(key)!="..."){
+						if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
+						{
+			%>
+			<li><a href="#" onclick="myPage('questionList?<%=key%>')"><%=model.getPageLinkDic().get(key)%></a>
+			</li>
+			<%
+				}else {
+			%>
+			<li class='active'><a href="#"><%=model.getCurrentPage()%></a>
+			</li>
+			<%
+				}}
+						else
+						{
+			%>
+			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a>
+			</li>
+			<%
+				}
+						}
+			%>
+		</ul>
+	</nav>
+	<%
+		} /*--------------分页------------*/
+	%>

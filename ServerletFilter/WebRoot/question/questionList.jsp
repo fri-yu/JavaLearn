@@ -10,7 +10,10 @@
 <%
 	QuestionListModel model = (QuestionListModel) request
 	.getAttribute("model");
-	String  questionType=model.getSelectQuestionType();
+	String questionType=model.getSelectQuestionType();
+	String selectDiffcultyPoint=model.getSelectDiffcultyPoint();
+	//out.print(questionType);
+	//out.print(selectDiffcultyPoint);
 %>
 <form class="form-inline" id="queryFormQuestion">
 	<div class="row">
@@ -30,17 +33,20 @@
 				id="questionType" name="questionType" />
 		</div>
 		<div class="col-md-2 text-center">
-			<label for="difficultPointSel">难度：</label> <select
-				class="form-control" style="width:60%;" id="difficultPointSel"
-				name="difficultPoint">
+			<label for="difficultPointySel">难度：</label> <select
+				class="form-control" style="width:60%;" id="difficultyPointSel"
+				onchange="difficultyPointChange(this.value)">
+				<option value="12345">请选择</option>
 				<%
 					for (EDifficultyPoint et : EDifficultyPoint.values()) {
 				%>
-				<option value="<%=et.getValue()%>"><%=et.getValue()%></option>
+				<option value="<%=et.getValue()%>"
+					<%if(selectDiffcultyPoint.equals(et.getValue()))  out.print("selected='selected'");%>><%=et.getValue()%></option>
 				<%
 					}
 				%>
-			</select>
+			</select> <input type="hidden" value='<%=selectDiffcultyPoint%>'
+				id="difficultyPoint" name="difficultyPoint" />
 		</div>
 
 		<div class="col-md-1 text-center">
@@ -72,13 +78,28 @@
 %>
 
 <script type="text/javascript">
+$("a").click(function(e) {
+		e.preventDefault();
+	});
+//题型选择被更新时，更新隐藏域数据（用于查询提交）
 	function questionTypeChange(str) {
 		$("#questionType").val(str);
+		$("#difficultyPoint").val('');//清空选择的难度
+		$("#difficultyPointSel option:first").attr("selected",true);//难度下拉框选中选项改为“请选择”
+		
+	}
+	//
+	function difficultyPointChange(str){
+			$("#difficultyPoint").val(str);
 	}
 	function query() {
 		var params = serializeForm('queryFormQuestion');
-		loadDataByGet("<%=basePath%>
-	" + "questionList?" + params,
+		//alert(params);
+		loadDataByGet("<%=basePath%>" + "questionList?" + params,
 				"questionList");
+	}
+	function myPage(url){
+	//alert(url);
+		loadDataByGet("<%=basePath%>" + url, "questionList");
 	}
 </script>
