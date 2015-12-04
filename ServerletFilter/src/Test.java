@@ -20,12 +20,12 @@ public class Test {
 		// method(arr);
 		// System.out.println(arr.hashCode());
 		// MyRegex_3("");
-		//AddData();
-		for(EQuestionType st:EQuestionType.values())
-		{
-			System.out.println(st.getValue());
-			
-		}
+		AddData();
+//		for(EQuestionType st:EQuestionType.values())
+//		{
+//			System.out.println(st.getValue());
+//			
+//		}
 	}
 
 	private static void AddData() {
@@ -38,13 +38,13 @@ public class Test {
 		cq.setOptionC("C++");
 		cq.setOptionD("JavaScript");
 		cq.setAnswer("D");
-		cq.setDifficultyPonit(EDifficultyPoint.Point9.getValue());
+		cq.setDifficultyPoint(EDifficultyPoint.Point9.getValue());
 		session.beginTransaction();
 		session.save(cq);
 		QuestionCompletion qc=new QuestionCompletion();
 		qc.setContent(".NET不用主动释放内存是因为()");
 		qc.setAnswer("GC|垃圾回收机制");
-		qc.setDifficultyPonit(EDifficultyPoint.Point8.getValue());
+		qc.setDifficultyPoint(EDifficultyPoint.Point8.getValue());
 		session.save(qc);
 		session.getTransaction().commit();
 	}
