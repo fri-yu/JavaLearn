@@ -12,6 +12,8 @@ import com.demo.domain.QuestionTrueorfalse;
 public class QuestionListModel extends VModelBase {
 
 	private String selectQuestionType;
+	private String selectDiffcultyPoint;
+
 	private List<QuestionChoice> qCList;
 	private List<QuestionCompletion> qComList;
 	private List<QuestionTrueorfalse> qTList;
@@ -23,6 +25,14 @@ public class QuestionListModel extends VModelBase {
 
 	public void setSelectQuestionType(String selectQuestionType) {
 		this.selectQuestionType = selectQuestionType;
+	}
+
+	public String getSelectDiffcultyPoint() {
+		return selectDiffcultyPoint;
+	}
+
+	public void setSelectDiffcultyPoint(String selectDiffcultyPoint) {
+		this.selectDiffcultyPoint = selectDiffcultyPoint;
 	}
 
 	public List<QuestionChoice> getqCList() {
