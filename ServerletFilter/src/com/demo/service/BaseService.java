@@ -1,5 +1,6 @@
 package com.demo.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -40,6 +41,13 @@ public class BaseService {
 			closeSession(session);
 		}
 		return pageCount;
+	}
+
+	public static Object getObject(Class clst, Serializable id) {
+		Object object = null;
+		Session session = HibernateUtil.getCurrentSession();
+		object = session.get(clst, id);
+		return object;
 	}
 
 	private static void closeSession(Session session) {
