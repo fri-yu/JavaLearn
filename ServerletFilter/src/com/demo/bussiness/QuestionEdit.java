@@ -25,6 +25,9 @@ public class QuestionEdit extends HttpServlet {
 
 		Object model = GetModel(req);
 		req.setAttribute("model", model);
+		Integer hiloId = req.getParameter("hiloId") == null ? -1 : Integer
+				.parseInt(req.getParameter("hiloId").trim());
+		req.setAttribute("hiloId", hiloId);
 		RequestDispatcher dispatcher = req.getRequestDispatcher(dispatcherJsp);
 		dispatcher.forward(req, resp);
 	}
@@ -62,24 +65,33 @@ public class QuestionEdit extends HttpServlet {
 		Object object = null;
 		String questionType = req.getParameter("questionType") == null ? EQuestionType.QChoice
 				.getKey() : req.getParameter("questionType").trim();
-		Integer hiloId = req.getParameter("hiloId") == null ? 1 : Integer
+		Integer hiloId = req.getParameter("hiloId") == null ? -1 : Integer
 				.parseInt(req.getParameter("hiloId").trim());
 
 		if (questionType != null) {
 			// 选择题
 			if (questionType.equals(EQuestionType.QChoice.getKey())) {
-				object = PaperService.getObject(QuestionChoice.class, hiloId);
-
+				if (hiloId != -1)
+					object = PaperService.getObject(QuestionChoice.class,
+							hiloId);
+				else
+					object = new QuestionChoice();
 			}
 			// 填空题
 			else if (questionType.equals(EQuestionType.QCompletion.getKey())) {
-				object = PaperService.getObject(QuestionCompletion.class,
-						hiloId);
+				if (hiloId != -1)
+					object = PaperService.getObject(QuestionCompletion.class,
+							hiloId);
+				else
+					object = new QuestionCompletion();
 			}
 			// 判断题
 			else if (questionType.equals(EQuestionType.QTrueOrFalse.getKey())) {
-				object = PaperService.getObject(QuestionTrueorfalse.class,
-						hiloId);
+				if (hiloId != -1)
+					object = PaperService.getObject(QuestionTrueorfalse.class,
+							hiloId);
+				else
+					object = new QuestionTrueorfalse();
 			}
 			// 简答题
 			else if (questionType.equals(EQuestionType.QSAQ.getKey())) {

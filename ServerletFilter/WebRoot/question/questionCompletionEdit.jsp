@@ -1,28 +1,45 @@
+<%@page import="com.demo.domain.QuestionCompletion"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
+<%
+	QuestionCompletion question = (QuestionCompletion) request
+			.getAttribute("model");
+	if (question != null) {
+%>
+<form class="form-horizontal" id="questionEditForm">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">题干</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="" placeholder="题干" name="uName"
+				value='<%=question.getContent()%>' />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-sm-2 control-label">答案</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="" placeholder="答案" name="uPsd"
+				value='<%=question.getAnswer()%>' /> <input type="hidden"
+				name="hiloid" value="<%=request.getAttribute("hiloId")%>" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="button" class="btn btn-default" onclick="myPost()">保存</button>
+		</div>
+	</div>
+</form>
+<%
+	}
+%>
+<script type="text/javascript">
+	function myPost() {
+		loadDataByPost("<%=basePath%>"+ "questionEdit", "questionList",
+				serializeForm('questionEditForm'));
+	}
+</script>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'questionCompletionEdit.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
-</html>
