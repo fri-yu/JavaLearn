@@ -11,14 +11,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <form class="form-inline" id="queryForm">
 	<div class="row">
-		<div class="col-md-3 text-center">
+		<div class="col-md-4 text-center">
 			<div class="form-group">
 				<label for="inputName">查询1：</label> <input type="text"
 					class="form-control" id="inputName" placeholder="请输入姓名"
 					name="queryName">
 			</div>
 		</div>
-		<div class="col-md-3 text-center">
+		<div class="col-md-4 text-center">
 			<div class="form-group">
 
 				<label for="inputAge">查询2：</label> <input type="text"

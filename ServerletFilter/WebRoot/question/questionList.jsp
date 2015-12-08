@@ -17,7 +17,7 @@
 %>
 <form class="form-inline" id="queryFormQuestion">
 	<div class="row">
-		<div class="col-md-2 text-center">
+		<div class="col-md-3 text-center">
 			<label for="questionTypeSel">题型：</label> <select class="form-control"
 				style="width:60%;" id="questionTypeSel"
 				onchange="questionTypeChange(this.value)">
@@ -32,7 +32,7 @@
 			</select> <input type="hidden" value='<%=model.getSelectQuestionType()%>'
 				id="questionType" name="questionType" />
 		</div>
-		<div class="col-md-2 text-center">
+		<div class="col-md-3 text-center">
 			<label for="difficultPointySel">难度：</label> <select
 				class="form-control" style="width:60%;" id="difficultyPointSel"
 				onchange="difficultyPointChange(this.value)">
@@ -53,7 +53,7 @@
 			<button type="button" class="btn btn-default" onclick="query()">查询</button>
 		</div>
 		<div class="col-md-1 text-center">
-			<button type="button" class="btn btn-default" onclick="addUser()">添加</button>
+			<button type="button" class="btn btn-default" onclick="addQuestion()">添加</button>
 		</div>
 	</div>
 </form>
@@ -90,16 +90,22 @@ $("a").click(function(e) {
 	}
 	//
 	function difficultyPointChange(str){
-			$("#difficultyPoint").val(str);
+		$("#difficultyPoint").val(str);
 	}
 	function query() {
 		var params = serializeForm('queryFormQuestion');
 		//alert(params);
-		loadDataByGet("<%=basePath%>" + "questionList?" + params,
-				"questionList");
+		pageLoadData("questionList?" + params);
 	}
 	function myPage(url){
 	//alert(url);
-		loadDataByGet("<%=basePath%>" + url, "questionList");
+		pageLoadData(url);
+	}
+	function addQuestion(){
+		var params = serializeForm('queryFormQuestion');
+		pageLoadData("questionEdit?" + params+"&id=-1");
+	}
+	function pageLoadData(urlPart){
+		loadDataByGet("<%=basePath%>" + urlPart,"questionList");
 	}
 </script>

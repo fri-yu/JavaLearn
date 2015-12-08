@@ -27,7 +27,7 @@
 		<tr>
 			<td><%=q.getContent()%></td>
 			<td><%=q.getDifficultyPoint()%></td>
-			<td><a href='#' onclick="">编辑</a>|
+			<td><a href='#<%=q.getHiloId()%>' onclick="">编辑</a>|
 				<a href='#' onclick="">删除</a>
 			</td>
 		</tr>
