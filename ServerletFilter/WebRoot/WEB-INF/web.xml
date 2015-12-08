@@ -7,6 +7,7 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+	<!-- servlet列表 -->
 	<servlet>
 		<servlet-name>hello_world</servlet-name>
 		<servlet-class>com.demo.bussiness.HelloWorld</servlet-class>
@@ -44,6 +45,11 @@
 		<servlet-name>questionList</servlet-name>
 		<servlet-class>com.demo.bussiness.QuestionList</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>questionEdit</servlet-name>
+		<servlet-class>com.demo.bussiness.QuestionEdit</servlet-class>
+	</servlet>
+	<!-- servlet-mapping列表 -->
 	<servlet-mapping>
 		<servlet-name>hello_world</servlet-name>
 		<url-pattern>/hello</url-pattern>
@@ -79,6 +85,10 @@
 	<servlet-mapping>
 		<servlet-name>questionList</servlet-name>
 		<url-pattern>/questionList</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>questionEdit</servlet-name>
+		<url-pattern>/questionEdit</url-pattern>
 	</servlet-mapping>
 	<context-param>
 		<param-name>ss</param-name>

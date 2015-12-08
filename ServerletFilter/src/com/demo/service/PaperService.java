@@ -1,9 +1,11 @@
 package com.demo.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.type.ClassType;
 
 import com.demo.domain.User;
 import com.demo.util.HibernateUtil;
@@ -41,6 +43,13 @@ public class PaperService extends BaseService {
 			closeSession(session);
 		}
 		return pageCount;
+	}
+
+	public static Object getObject(Class clst, Serializable id) {
+		Object object = null;
+		Session session = HibernateUtil.getCurrentSession();
+		object = session.get(clst, id);
+		return object;
 	}
 
 	private static void closeSession(Session session) {
