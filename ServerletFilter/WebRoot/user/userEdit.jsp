@@ -1,5 +1,4 @@
-<%@ page language="java" import="java.util.*,com.demo.domain.User"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.demo.domain.User" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,21 +18,19 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">账号</label>
 		<div class="col-sm-10">
-			<input class="form-control" id="inputEmail3" placeholder="账号"
-				name="uName" value='<%=user.getName()%>' />
+			<input class="form-control" id="inputEmail3" placeholder="账号" name="uName" value='<%=user.getName()%>' />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
 		<div class="col-sm-10">
-			<input type="password" class="form-control" id="inputPassword3"
-				placeholder="Password" name="uPsd" value='<%=user.getPassword()%>' />
-			<input type="hidden" name="cid" value="<%=user.getCid()%>" />
+			<input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="uPsd"
+				value='<%=user.getPassword()%>' /> <input type="hidden" name="cid" value="<%=user.getCid()%>" />
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="button" class="btn btn-default" onclick="myPost()">保存</button>
+			<button type="button" class="btn btn-default" onclick="myPost('<%=basePath%>'+'userEdit','userList','userEditForm')">保存</button>
 		</div>
 	</div>
 </form>
@@ -41,8 +38,8 @@
 	}
 %>
 <script type="text/javascript">
-	function myPost() {
-		loadDataByPost("<%=basePath%>"+"userEdit","userList",serializeForm('userEditForm'));
-	}
+	$("a").click(function(e) {
+		e.preventDefault();
+	});
 </script>
 

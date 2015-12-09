@@ -27,7 +27,7 @@
 		<tr>
 			<td><%=q.getContent()%></td>
 			<td><%=q.getDifficultyPoint()%></td>
-			<td><a href='#<%=q.getHiloId()%>' onclick="">编辑</a>|
+			<td><a href='#<%=q.getHiloId()%>' onclick="myLoad('questionEdit?hiloId=<%=q.getHiloId() %>','questionList')">编辑</a>|
 				<a href='#' onclick="">删除</a>
 			</td>
 		</tr>
@@ -49,7 +49,7 @@
 						if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
 						{
 			%>
-			<li><a href="#" onclick="myPage('questionList?<%=key%>')"><%=model.getPageLinkDic().get(key)%></a>
+			<li><a href="#" onclick="myLoad('questionList?<%=key%>','questionList')"><%=model.getPageLinkDic().get(key)%></a>
 			</li>
 			<%
 				}else {

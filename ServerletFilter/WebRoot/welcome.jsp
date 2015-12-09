@@ -21,29 +21,28 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <link rel="stylesheet" href="Content/Css/myCss.css" type="text/css"></link>
-<script type="text/javascript" src="Content/JS/myJs.js"></script>
 
-<link rel="stylesheet"
-	href="Content/bootstrap-3.3.5-dist/css/bootstrap.css" type="text/css"></link>
+
+<link rel="stylesheet" href="Content/bootstrap-3.3.5-dist/css/bootstrap.css" type="text/css"></link>
 <script type="text/javascript" src="Content/JS/jquery-2.1.3.min.js"></script>
-<script type="text/javascript"
-	src="Content/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Content/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Content/JS/myJs.js"></script>
+<script type="text/javascript" src="Content/JS/myJSPJs.js"></script>
 </head>
 
 <body style='background-color:#E6E2EB;'>
 	<!-- <a href='userList'>用户列表</a>
 	<a>添加用户</a> -->
-	<div class="row"
-		style="width:98%;padding-top:120px;margin-right:auto;margin-left:auto;">
+	<div class="row" style="width:98%;padding-top:120px;margin-right:auto;margin-left:auto;">
 		<div class="col-md-1"></div>
 		<div class="col-md-3">
 			<ul id="myTab" class="nav nav-tabs  nav-stacked">
-				<li class="active"><a href="#userList" name="userList"
-					onclick="loadDiv(this)">用户列表</a></li>
-				<li><a href="#paperList" name="paperList"
-					onclick="loadDiv(this)">试卷列表</a></li>
-				<li><a href="#questionList" name="questionList"
-					onclick="loadDiv(this,'questionType=Choice')">试题列表</a></li>
+				<li class="active"><a href="#userList" name="userList" onclick="loadDiv(this)">用户列表</a>
+				</li>
+				<li><a href="#paperList" name="paperList" onclick="loadDiv(this)">试卷列表</a>
+				</li>
+				<li><a href="#questionList" name="questionList" onclick="loadDiv(this,'questionType=Choice')">试题列表</a>
+				</li>
 			</ul>
 		</div>
 		<div class="col-md-7">

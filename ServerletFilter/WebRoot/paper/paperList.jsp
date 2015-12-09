@@ -1,7 +1,5 @@
 <%@page import="com.demo.domain.Paper"%>
-<%@ page language="java"
-	import="java.util.*,com.demo.viewModel.PaperListModel"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.demo.viewModel.PaperListModel" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -13,16 +11,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="row">
 		<div class="col-md-4 text-center">
 			<div class="form-group">
-				<label for="inputName">查询1：</label> <input type="text"
-					class="form-control" id="inputName" placeholder="请输入姓名"
+				<label for="inputName">查询1：</label> <input type="text" class="form-control" id="inputName" placeholder="请输入姓名"
 					name="queryName">
 			</div>
 		</div>
 		<div class="col-md-4 text-center">
 			<div class="form-group">
 
-				<label for="inputAge">查询2：</label> <input type="text"
-					class="form-control" id="inputAge" placeholder="请输入年龄"
+				<label for="inputAge">查询2：</label> <input type="text" class="form-control" id="inputAge" placeholder="请输入年龄"
 					name="queryAge">
 			</div>
 		</div>
@@ -52,9 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td><%=p.getCompletionCount()%></td>
 			<td><%=p.getTrueOrFalseCount()%></td>
 			<td><%=p.getShortAnswerCount()%></td>
-			<td><a href='#' onclick="">编辑</a>|
-				<a href='#' onclick="">删除</a>
-			</td>
+			<td><a href='#' onclick="">编辑</a>| <a href='#' onclick="">删除</a></td>
 		</tr>
 		<%
 			}}
@@ -62,31 +56,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table>
 	<%
 		/*--------------分页------------*/
-		if (model != null) {
+			if (model != null) {
 	%><nav>
 		<ul class="pagination">
 			<%
 				for(String key :model.getPageLinkDic().keySet())
-							{
-							if(model.getPageLinkDic().get(key)!="..."){
-							if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
-							{
+					{
+					if(model.getPageLinkDic().get(key)!="..."){
+					if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
+					{
 			%>
-			<li><a href="#" onclick="myPage('paperList?<%=key%>')"><%=model.getPageLinkDic().get(key)%></a>
-			</li>
+			<li><a href="#" onclick="myLoad('paperList?<%=key%>','paperList')"><%=model.getPageLinkDic().get(key)%></a></li>
 			<%
 				}else {
 			%>
-			<li class='active'><a href="#"><%=model.getCurrentPage()%></a></li>
+			<li class='active'><a href="#"><%=model.getCurrentPage()%></a>
+			</li>
 			<%
 				}}
-							else
-							{
+					else
+					{
 			%>
-			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a></li>
+			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a>
+			</li>
 			<%
 				}
-							}
+					}
 			%>
 		</ul>
 	</nav>
@@ -95,14 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	%>
 </div>
 <script type="text/javascript">
-	
 	$("a").click(function(e) {
 		e.preventDefault();
 	});
-	
-	function myPage(url){
-	
-		loadDataByGet("<%=basePath%>" + url, "paperList");
-	}
-	
 </script>

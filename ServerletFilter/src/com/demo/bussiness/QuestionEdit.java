@@ -21,14 +21,13 @@ public class QuestionEdit extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// super.doGet(req, resp);
-		String dispatcherJsp = getDispatcherJsp(req);
 
 		Object model = GetModel(req);
 		req.setAttribute("model", model);
 		Integer hiloId = req.getParameter("hiloId") == null ? -1 : Integer
 				.parseInt(req.getParameter("hiloId").trim());
 		req.setAttribute("hiloId", hiloId);
-		RequestDispatcher dispatcher = req.getRequestDispatcher(dispatcherJsp);
+		RequestDispatcher dispatcher = getDispatcher(req);
 		dispatcher.forward(req, resp);
 	}
 
@@ -40,25 +39,28 @@ public class QuestionEdit extends HttpServlet {
 		this.doGet(req, resp);
 	}
 
-	private String getDispatcherJsp(HttpServletRequest req) {
+	private RequestDispatcher getDispatcher(HttpServletRequest req) {
 		String questionType = req.getParameter("questionType") == null ? EQuestionType.QChoice
 				.getKey() : req.getParameter("questionType").trim();
+		req.setAttribute("questionType", questionType);
 		if (questionType.equals(EQuestionType.QChoice.getKey())) {
-			return "/question/questionChoiceEdit.jsp";
+			return req.getRequestDispatcher("/question/questionChoiceEdit.jsp");
 		}
 		// ÃÓø’Ã‚
 		else if (questionType.equals(EQuestionType.QCompletion.getKey())) {
-			return "/question/questionCompletionEdit.jsp";
+			return req
+					.getRequestDispatcher("/question/questionCompletionEdit.jsp");
 		}
 		// ≈–∂œÃ‚
 		else if (questionType.equals(EQuestionType.QTrueOrFalse.getKey())) {
-			return "/question/questionTrueOrFalseEdit.jsp";
+			return req
+					.getRequestDispatcher("/question/questionTrueOrFalseEdit.jsp");
 		}
 		// ºÚ¥Ã‚
 		else if (questionType.equals(EQuestionType.QSAQ.getKey())) {
-			return "/question/questionSAQEdit.jsp";
+			return req.getRequestDispatcher("/question/questionSAQEdit.jsp");
 		}
-		return "/question/questionErr.jsp";
+		return req.getRequestDispatcher("/question/questionErr.jsp");
 	}
 
 	private Object GetModel(HttpServletRequest req) {

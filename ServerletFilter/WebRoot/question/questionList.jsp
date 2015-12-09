@@ -50,7 +50,7 @@
 		</div>
 
 		<div class="col-md-1 text-center">
-			<button type="button" class="btn btn-default" onclick="query()">查询</button>
+			<button type="button" class="btn btn-default" onclick="query('questionList','queryFormQuestion','questionList')">查询</button>
 		</div>
 		<div class="col-md-1 text-center">
 			<button type="button" class="btn btn-default" onclick="addQuestion()">添加</button>
@@ -91,15 +91,6 @@ $("a").click(function(e) {
 	//
 	function difficultyPointChange(str){
 		$("#difficultyPoint").val(str);
-	}
-	function query() {
-		var params = serializeForm('queryFormQuestion');
-		//alert(params);
-		pageLoadData("questionList?" + params);
-	}
-	function myPage(url){
-	//alert(url);
-		pageLoadData(url);
 	}
 	function addQuestion(){
 		var params = serializeForm('queryFormQuestion');

@@ -17,7 +17,7 @@ function loadData(url, divId, method, data) {
 	});
 }
 function loadDataByGet(url, divId) {
-	 //alert("loadDataByGet run");
+	// alert("loadDataByGet run");
 	loadData(url, divId, 'GET');
 }
 function loadDataByPost(url, divId, data) {
