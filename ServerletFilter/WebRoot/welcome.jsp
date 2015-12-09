@@ -28,6 +28,7 @@
 <script type="text/javascript" src="Content/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="Content/JS/myJs.js"></script>
 <script type="text/javascript" src="Content/JS/myJSPJs.js"></script>
+<script type="text/javascript" src="Content/JS/bootstrapValidator.min.js"></script>
 </head>
 
 <body style='background-color:#E6E2EB;'>

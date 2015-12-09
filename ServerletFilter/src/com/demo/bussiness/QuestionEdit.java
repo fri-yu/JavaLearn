@@ -40,29 +40,29 @@ public class QuestionEdit extends HttpServlet {
 		// TODO Auto-generated method stub
 		// super.doPost(req, resp);
 		postHandler(req);
-		resp.sendRedirect("questionList?questionType="+req.getParameter("questionType").trim());
-		
-				
+		resp.sendRedirect("questionList?questionType="
+				+ req.getParameter("questionType").trim());
+
 	}
 
-	private boolean postHandler(HttpServletRequest req)
-	{
-		String questionType =  req.getParameter("questionType").trim();
-		if(null==questionType)
+	private boolean postHandler(HttpServletRequest req) {
+		String questionType = req.getParameter("questionType").trim();
+		if (null == questionType)
 			return false;
-		
-		QuestionChoice model=getQuestionChoiceModel(req);
-		boolean dataOptionResult=false;
-		if(model.getHiloId()==-1)
-			dataOptionResult=BaseService.updateOrSave(model,EDataOption.save);
-		else if(model.getHiloId()>0)
-			dataOptionResult=BaseService.updateOrSave(model,EDataOption.update);
+
+		QuestionChoice model = getQuestionChoiceModel(req);
+		boolean dataOptionResult = false;
+		if (model.getHiloId() == -1)
+			dataOptionResult = BaseService
+					.updateOrSave(model, EDataOption.save);
+		else if (model.getHiloId() > 0)
+			dataOptionResult = BaseService.updateOrSave(model,
+					EDataOption.update);
 		return dataOptionResult;
 	}
-	
-	private QuestionChoice getQuestionChoiceModel(HttpServletRequest req)
-	{
-		QuestionChoice questionChoice=new QuestionChoice();
+
+	private QuestionChoice getQuestionChoiceModel(HttpServletRequest req) {
+		QuestionChoice questionChoice = new QuestionChoice();
 		questionChoice.setHiloId(Integer.parseInt(req.getParameter("hiloId")));
 		questionChoice.setContent(req.getParameter("qContent"));
 		questionChoice.setOptionA(req.getParameter("optionA"));
@@ -72,10 +72,10 @@ public class QuestionEdit extends HttpServlet {
 		questionChoice.setOptionE(req.getParameter("optionE"));
 		questionChoice.setDifficultyPoint(req.getParameter("difficultyPoint"));
 		questionChoice.setAnswer(req.getParameter("qAnswer"));
-		
+
 		return questionChoice;
 	}
-	
+
 	private RequestDispatcher getDispatcher(HttpServletRequest req) {
 		String questionType = req.getParameter("questionType") == null ? EQuestionType.QChoice
 				.getKey() : req.getParameter("questionType").trim();
@@ -114,7 +114,7 @@ public class QuestionEdit extends HttpServlet {
 					object = PaperService.getObject(QuestionChoice.class,
 							hiloId);
 				else
-					object = new QuestionChoice();
+					object = new QuestionChoice("", "", "", "", "", "", "", "");
 			}
 			// ÃÓø’Ã‚
 			else if (questionType.equals(EQuestionType.QCompletion.getKey())) {
@@ -122,7 +122,7 @@ public class QuestionEdit extends HttpServlet {
 					object = PaperService.getObject(QuestionCompletion.class,
 							hiloId);
 				else
-					object = new QuestionCompletion();
+					object = new QuestionCompletion("", "", "");
 			}
 			// ≈–∂œÃ‚
 			else if (questionType.equals(EQuestionType.QTrueOrFalse.getKey())) {
@@ -130,7 +130,7 @@ public class QuestionEdit extends HttpServlet {
 					object = PaperService.getObject(QuestionTrueorfalse.class,
 							hiloId);
 				else
-					object = new QuestionTrueorfalse();
+					object = new QuestionTrueorfalse("", "", "");
 			}
 			// ºÚ¥Ã‚
 			else if (questionType.equals(EQuestionType.QSAQ.getKey())) {

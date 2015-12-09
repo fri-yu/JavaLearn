@@ -61,7 +61,7 @@
 				<%
 					}
 				%>
-			</select> <input type="hidden" value='<%=0%>' id="difficultyPoint" name="difficultyPoint" />
+			</select> <input type="hidden" value='<%=EDifficultyPoint.Point9.getValue()%>' id="difficultyPoint" name="difficultyPoint" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -74,8 +74,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="button" class="btn btn-default"
-				onclick="myPost('questionEdit?questionType=<%=request.getAttribute("questionType")%>','questionEditForm','questionList')">保存</button>
+			<button type="button" class="btn btn-default" id="btnSave" onclick="pageSave()">保存</button>
 		</div>
 	</div>
 </form>
@@ -85,6 +84,74 @@
 <script type="text/javascript">
 	function difficultyPointChange(str) {
 		$("#difficultyPoint").val(str);
+	}
+	$(document).ready(function() {
+	 $('#questionEditForm').bootstrapValidator({
+//        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            qContent: {
+                validators: {
+                    notEmpty: {
+                        message: '题干不能为空'
+                    }
+                }
+            },
+            optionA: {
+                validators: {
+                    notEmpty: {
+                        message: 'A选项不能为空'
+                    }
+                }
+            },
+             optionB: {
+                validators: {
+                    notEmpty: {
+                        message: 'B选项不能为空'
+                    }
+                }
+            },
+             optionC: {
+                validators: {
+                    notEmpty: {
+                        message: 'C选项不能为空'
+                    }
+                }
+            },
+             optionD: {
+                validators: {
+                    notEmpty: {
+                        message: 'D选项不能为空'
+                    }
+                }
+            },
+            qAnswer:{
+             validators: {
+                    notEmpty: {
+                        message: '答案不能为空'
+                    }
+                }
+            }
+        }
+    });
+	
+    $('#resetBtn').click(function() {
+        $('#defaultForm').data('bootstrapValidator').resetForm(true);
+    });
+	});
+	function pageSave()
+	{
+	  $('#questionEditForm').bootstrapValidator('validate');
+	 if('true'==$('#questionEditForm').data('bootstrapValidator').isValid()) 
+        {
+        var questionType='<%=request.getAttribute("questionType")%>';
+			myPost('questionEdit?questionType=' + questionType, 'questionEditForm', 'questionList')
+		}
 	}
 </script>
 
