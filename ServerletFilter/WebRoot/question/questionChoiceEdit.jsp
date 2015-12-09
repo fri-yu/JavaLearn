@@ -1,14 +1,15 @@
+<%@page import="com.demo.util.EDifficultyPoint"%>
 <%@ page language="java" import="java.util.*,com.demo.domain.QuestionChoice" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
 %>
 <base href="<%=basePath%>">
 <%
 	QuestionChoice question = (QuestionChoice) request
-			.getAttribute("model");
+	.getAttribute("model");
 	if (question != null) {
 %>
 <form class="form-horizontal" id="questionEditForm">
@@ -50,9 +51,17 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-sm-2 control-label">难度系数</label>
+		<label class="col-sm-2 control-label">选项E</label>
 		<div class="col-sm-10">
-			<input class="form-control" id="" placeholder="难度系数" name="difficultyPoint" value='<%=question.getDifficultyPoint()%>' />
+			<select class="form-control" style="width:60%;" id="difficultyPointSel" onchange="difficultyPointChange(this.value)">
+				<%
+					for (EDifficultyPoint et : EDifficultyPoint.values()) {
+				%>
+				<option value="<%=et.getValue()%>"><%=et.getValue()%></option>
+				<%
+					}
+				%>
+			</select> <input type="hidden" value='<%=0%>' id="difficultyPoint" name="difficultyPoint" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -73,4 +82,9 @@
 <%
 	}
 %>
+<script type="text/javascript">
+	function difficultyPointChange(str) {
+		$("#difficultyPoint").val(str);
+	}
+</script>
 
