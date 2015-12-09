@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.demo.domain.QuestionChoice;
 import com.demo.domain.QuestionCompletion;
 import com.demo.domain.QuestionTrueorfalse;
+import com.demo.service.BaseService;
 import com.demo.service.PaperService;
+import com.demo.service.UserService;
+import com.demo.util.EDataOption;
 import com.demo.util.EQuestionType;
 
 public class QuestionEdit extends HttpServlet {
@@ -36,9 +39,43 @@ public class QuestionEdit extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// super.doPost(req, resp);
-		this.doGet(req, resp);
+		postHandler(req);
+		resp.sendRedirect("questionList?questionType="+req.getParameter("questionType").trim());
+		
+				
 	}
 
+	private boolean postHandler(HttpServletRequest req)
+	{
+		String questionType =  req.getParameter("questionType").trim();
+		if(null==questionType)
+			return false;
+		
+		QuestionChoice model=getQuestionChoiceModel(req);
+		boolean dataOptionResult=false;
+		if(model.getHiloId()==-1)
+			dataOptionResult=BaseService.updateOrSave(model,EDataOption.save);
+		else if(model.getHiloId()>0)
+			dataOptionResult=BaseService.updateOrSave(model,EDataOption.update);
+		return dataOptionResult;
+	}
+	
+	private QuestionChoice getQuestionChoiceModel(HttpServletRequest req)
+	{
+		QuestionChoice questionChoice=new QuestionChoice();
+		questionChoice.setHiloId(Integer.parseInt(req.getParameter("hiloId")));
+		questionChoice.setContent(req.getParameter("qContent"));
+		questionChoice.setOptionA(req.getParameter("optionA"));
+		questionChoice.setOptionB(req.getParameter("optionB"));
+		questionChoice.setOptionC(req.getParameter("optionC"));
+		questionChoice.setOptionD(req.getParameter("optionD"));
+		questionChoice.setOptionE(req.getParameter("optionE"));
+		questionChoice.setDifficultyPoint(req.getParameter("difficultyPoint"));
+		questionChoice.setAnswer(req.getParameter("qAnswer"));
+		
+		return questionChoice;
+	}
+	
 	private RequestDispatcher getDispatcher(HttpServletRequest req) {
 		String questionType = req.getParameter("questionType") == null ? EQuestionType.QChoice
 				.getKey() : req.getParameter("questionType").trim();

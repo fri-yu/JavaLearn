@@ -5,10 +5,14 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import com.demo.domain.QuestionChoice;
+import com.demo.util.EDataOption;
 import com.demo.util.HibernateUtil;
 
 public class BaseService {
+
 	public static int getList(int pageSize, int currentPage, List modelList,
 			String tableName, String hqlWhere, List<String> params) {
 		Session session = HibernateUtil.openSession();
@@ -48,6 +52,39 @@ public class BaseService {
 		Session session = HibernateUtil.getCurrentSession();
 		object = session.get(clst, id);
 		return object;
+	}
+
+	/**
+	 * 更新或者新增数据到数据库
+	 * 
+	 * @param object
+	 * @param option
+	 * @return
+	 */
+	public static boolean updateOrSave(Object object, EDataOption option) {
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			if (option.equals(EDataOption.update)) {
+				System.out.println("update data");
+				session.update(object);
+			}
+
+			else if (option.equals(EDataOption.save)) {
+				System.out.println("save data");
+				session.save(object);
+			}
+			System.out.println(((QuestionChoice)object).getHiloId());
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			transaction.rollback();
+			return false;
+		} finally {
+			closeSession(session);
+		}
 	}
 
 	private static void closeSession(Session session) {

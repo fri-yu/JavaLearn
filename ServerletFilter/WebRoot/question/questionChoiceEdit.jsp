@@ -50,6 +50,12 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="col-sm-2 control-label">难度系数</label>
+		<div class="col-sm-10">
+			<input class="form-control" id="" placeholder="难度系数" name="difficultyPoint" value='<%=question.getDifficultyPoint()%>' />
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="inputPassword3" class="col-sm-2 control-label">答案</label>
 		<div class="col-sm-10">
 			<input class="form-control" id="" placeholder="答案" name="qAnswer" value='<%=question.getAnswer()%>' /> <input
