@@ -10,6 +10,7 @@ function query(getUrl, getForm, freshDiv) {
 	loadDataByGet(getUrl + "?&" + params, freshDiv);
 }
 function myPost(postUrl, postForm, freshDiv) {
+	//alert( serializeForm(postForm));
 	loadDataByPost(postUrl, freshDiv, serializeForm(postForm));
 }
 function del(url, getUrl) {

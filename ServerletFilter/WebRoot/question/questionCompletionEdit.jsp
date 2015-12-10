@@ -31,9 +31,7 @@
 			<div class="form-group">
 				<label for="inputPassword3" class="col-sm-2 control-label">答案</label>
 				<div class="col-sm-10">
-					<input class="form-control" id="" placeholder="答案" name="qAnswer" value='<%=question.getAnswer()%>' /> <input
-						type="hidden" name="hiloId" value="<%=request.getAttribute("hiloId")%>" /> <input type="hidden"
-						name="questionType" value="<%=request.getAttribute("questionType")%>" />
+					<input class="form-control" id="" placeholder="答案" name="qAnswer" value='<%=question.getAnswer()%>' />
 				</div>
 			</div>
 			<div class="form-group">
@@ -51,11 +49,13 @@
 					</select> <input type="hidden" value='<%=EDifficultyPoint.Point9.getValue()%>' id="difficultyPoint" name="difficultyPoint" />
 				</div>
 			</div>
-			
+
 		</div>
 		<div class="modal-footer">
+			<input type="hidden" name="hiloId" value="<%=request.getAttribute("hiloId")%>" /> <input type="hidden"
+				name="questionType" value="<%=request.getAttribute("questionType")%>" />
 			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			<button type="button" class="btn btn-primary"onclick="pageSave('<%=EQuestionType.QCompletion.getKey()%>')">保存</button>
+			<button type="button" class="btn btn-primary" onclick="pageSave('<%=EQuestionType.QCompletion.getKey()%>')">保存</button>
 		</div>
 	</form>
 </div>

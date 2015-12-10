@@ -63,7 +63,7 @@ public class QuestionEdit extends HttpServlet {
 		}
 		// ≈–∂œÃ‚
 		else if (questionType.equals(EQuestionType.QTrueOrFalse.getKey())) {
-			model = getQuestionChoiceModel(req);
+			model = getQuestionTrueOrFalseModel(req);
 		}
 		// ºÚ¥Ã‚
 		else if (questionType.equals(EQuestionType.QSAQ.getKey())) {
@@ -81,15 +81,28 @@ public class QuestionEdit extends HttpServlet {
 		return dataOptionResult;
 	}
 
+	private Object getQuestionTrueOrFalseModel(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		QuestionTrueorfalse questionTrueorfalse = new QuestionTrueorfalse();
+		questionTrueorfalse.setHiloId(Integer.parseInt(req
+				.getParameter("hiloId")));
+		questionTrueorfalse.setContent(req.getParameter("qContent"));
+		questionTrueorfalse.setAnswer(req.getParameter("qAnswer"));
+		questionTrueorfalse.setDifficultyPoint(req
+				.getParameter("difficultyPoint"));
+
+		return questionTrueorfalse;
+	}
+
 	private Object getQuestionCompletionModel(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		QuestionCompletion questionCompletion = new QuestionCompletion();
 		questionCompletion.setHiloId(Integer.parseInt(req
 				.getParameter("hiloId")));
 		questionCompletion.setContent(req.getParameter("qContent"));
+		questionCompletion.setAnswer(req.getParameter("qAnswer"));
 		questionCompletion.setDifficultyPoint(req
 				.getParameter("difficultyPoint"));
-		questionCompletion.setAnswer(req.getParameter("qAnswer"));
 
 		return questionCompletion;
 	}

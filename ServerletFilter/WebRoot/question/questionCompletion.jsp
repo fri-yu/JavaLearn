@@ -2,8 +2,10 @@
 <%@page import="com.demo.viewModel.QuestionListModel"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <%
 	QuestionListModel model = (QuestionListModel) request
@@ -19,14 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 		<%
 			if (model != null) {
-				for (QuestionCompletion q :cList) {
+				for (QuestionCompletion q : cList) {
 		%>
 		<tr>
 			<td><%=q.getContent()%></td>
 			<td><%=q.getDifficultyPoint()%></td>
-			<td><a href='#' onclick="myLoad('userEdit?cid=<%=q.getHiloId()%>')">编辑</a>|
-				<a href='#' onclick="del('userDel?cid=<%=q.getHiloId()%>');">删除</a>
-			</td>
+			<td><a href='#' onclick="myLoad('userEdit?cid=<%=q.getHiloId()%>')">编辑</a>| <a href='#'
+				onclick="del('userDel?cid=<%=q.getHiloId()%>');">删除</a></td>
 		</tr>
 		<%
 			}
@@ -35,37 +36,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table>
 </div>
 <%
-		/*--------------分页------------*/
-			if (model != null) {
-	%><nav>
-		<ul class="pagination">
-			<%
-				for(String key :model.getPageLinkDic().keySet())
-						{
-						if(model.getPageLinkDic().get(key)!="..."){
-						if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
-						{
-			%>
-			<li><a href="#" onclick="myLoad('questionList?<%=key%>','questionList')"><%=model.getPageLinkDic().get(key)%></a>
-			</li>
-			<%
-				}else {
-			%>
-			<li class='active'><a href="#"><%=model.getCurrentPage()%></a>
-			</li>
-			<%
-				}}
-						else
-						{
-			%>
-			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a>
-			</li>
-			<%
+	/*--------------分页------------*/
+	if (model != null) {
+%><nav>
+	<ul class="pagination">
+		<%
+			for (String key : model.getPageLinkDic().keySet()) {
+					if (model.getPageLinkDic().get(key) != "...") {
+						if (!model.getPageLinkDic().get(key)
+								.equals(model.getCurrentPage() + "")) {
+		%>
+		<li><a href="#" onclick="myLoad('questionList?<%=key%>','questionList')"><%=model.getPageLinkDic().get(key)%></a>
+		</li>
+		<%
+			} else {
+		%>
+		<li class='active'><a href="#"><%=model.getCurrentPage()%></a></li>
+		<%
+			}
+					} else {
+		%>
+		<li><a href="#"><%=model.getPageLinkDic().get(key)%></a></li>
+		<%
+			}
 				}
-						}
-			%>
-		</ul>
-	</nav>
-	<%
-		} /*--------------分页------------*/
-	%>
+		%>
+	</ul>
+</nav>
+<%
+	} /*--------------分页------------*/
+%>
