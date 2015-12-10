@@ -50,15 +50,48 @@ public class QuestionEdit extends HttpServlet {
 		if (null == questionType)
 			return false;
 
-		QuestionChoice model = getQuestionChoiceModel(req);
+		Object model = getQuestionChoiceModel(req);
+		//选择题
+		if (questionType.equals(EQuestionType.QChoice.getKey())) {
+			model = getQuestionChoiceModel(req);
+		}
+		// 填空题
+		else if (questionType.equals(EQuestionType.QCompletion.getKey())) {
+			//System.out.println("初始化填空题");
+			model = getQuestionCompletionModel(req);
+			
+		}
+		// 判断题
+		else if (questionType.equals(EQuestionType.QTrueOrFalse.getKey())) {
+			model = getQuestionChoiceModel(req);
+		}
+		// 简答题
+		else if (questionType.equals(EQuestionType.QSAQ.getKey())) {
+			model = getQuestionChoiceModel(req);
+		}
+		// 数据保存
 		boolean dataOptionResult = false;
-		if (model.getHiloId() == -1)
+		int hiloId = Integer.parseInt(req.getParameter("hiloId"));
+		if (hiloId == -1)
 			dataOptionResult = BaseService
 					.updateOrSave(model, EDataOption.save);
-		else if (model.getHiloId() > 0)
+		else if (hiloId > 0)
 			dataOptionResult = BaseService.updateOrSave(model,
 					EDataOption.update);
 		return dataOptionResult;
+	}
+
+	private Object getQuestionCompletionModel(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		QuestionCompletion questionCompletion = new QuestionCompletion();
+		questionCompletion.setHiloId(Integer.parseInt(req
+				.getParameter("hiloId")));
+		questionCompletion.setContent(req.getParameter("qContent"));
+		questionCompletion.setDifficultyPoint(req
+				.getParameter("difficultyPoint"));
+		questionCompletion.setAnswer(req.getParameter("qAnswer"));
+
+		return questionCompletion;
 	}
 
 	private QuestionChoice getQuestionChoiceModel(HttpServletRequest req) {

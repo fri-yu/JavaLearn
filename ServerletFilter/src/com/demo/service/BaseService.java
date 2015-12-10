@@ -65,16 +65,18 @@ public class BaseService {
 		Session session = HibernateUtil.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
+			// 更新数据
 			if (option.equals(EDataOption.update)) {
-				System.out.println("update data");
+				// System.out.println("update data");
 				session.update(object);
 			}
-
+			// 保存数据
 			else if (option.equals(EDataOption.save)) {
-				System.out.println("save data");
+				// System.out.println("save data");
+				// System.out.println(object.getClass());
 				session.save(object);
 			}
-			System.out.println(((QuestionChoice)object).getHiloId());
+			// System.out.println(((QuestionChoice) object).getHiloId());
 			transaction.commit();
 			return true;
 		} catch (Exception e) {

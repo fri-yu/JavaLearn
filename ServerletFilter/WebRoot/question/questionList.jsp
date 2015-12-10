@@ -53,7 +53,6 @@
 
 <%
 	if (questionType.equals(EQuestionType.QChoice.getKey())) {
-	out.print("去找选择题页面");
 %>
 <jsp:include page="questionChoice.jsp" />
 <%

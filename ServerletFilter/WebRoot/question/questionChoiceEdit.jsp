@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">选项E</label>
+				<label class="col-sm-2 control-label">难度</label>
 				<div class="col-sm-10">
 					<select class="form-control" style="width:60%;" id="difficultyPointSel"
 						onchange="difficultyPointChange(this.value)">

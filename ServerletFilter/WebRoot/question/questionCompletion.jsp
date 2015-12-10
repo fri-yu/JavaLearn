@@ -34,3 +34,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		%>
 	</table>
 </div>
+<%
+		/*--------------分页------------*/
+			if (model != null) {
+	%><nav>
+		<ul class="pagination">
+			<%
+				for(String key :model.getPageLinkDic().keySet())
+						{
+						if(model.getPageLinkDic().get(key)!="..."){
+						if(!model.getPageLinkDic().get(key).equals(model.getCurrentPage()+""))
+						{
+			%>
+			<li><a href="#" onclick="myLoad('questionList?<%=key%>','questionList')"><%=model.getPageLinkDic().get(key)%></a>
+			</li>
+			<%
+				}else {
+			%>
+			<li class='active'><a href="#"><%=model.getCurrentPage()%></a>
+			</li>
+			<%
+				}}
+						else
+						{
+			%>
+			<li><a href="#"><%=model.getPageLinkDic().get(key)%></a>
+			</li>
+			<%
+				}
+						}
+			%>
+		</ul>
+	</nav>
+	<%
+		} /*--------------分页------------*/
+	%>
