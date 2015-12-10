@@ -84,8 +84,8 @@
 			
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary"onclick="pageSave('<%=EQuestionType.QChoice%>')">保存</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			<button type="button" class="btn btn-primary"onclick="pageSave('<%=EQuestionType.QChoice.getKey()%>')">保存</button>
 		</div>
 	</form>
 </div>
