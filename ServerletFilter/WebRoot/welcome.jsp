@@ -61,6 +61,11 @@
 		</div>
 		<div class="col-md-1"></div>
 	</div>
+	
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" id="modelContent"></div>
+</div>
 	<script>
 		$(function() {
 			$('#myTab a:first').tab('show');

@@ -10,7 +10,7 @@
 	.getAttribute("model");
 	String questionType=model.getSelectQuestionType();
 	String selectDiffcultyPoint=model.getSelectDiffcultyPoint();
-	//out.print(questionType);
+	//out.print("questionType is "+questionType);
 	//out.print(selectDiffcultyPoint);
 %>
 <form class="form-inline" id="queryFormQuestion">
@@ -51,14 +51,9 @@
 	</div>
 </form>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document" id="modelContent">
-		
-	</div>
-</div>
 <%
 	if (questionType.equals(EQuestionType.QChoice.getKey())) {
+	out.print("去找选择题页面");
 %>
 <jsp:include page="questionChoice.jsp" />
 <%
@@ -100,11 +95,11 @@ $("a").click(function(e) {
 	function pageLoadData(urlPart){
 		loadDataByGet("<%=basePath%>" + urlPart, "modelContent");
 	}
-	function pageSave(questionType)
-	{
-	  $('#questionEditForm').bootstrapValidator('validate');
-	 if('true'==$('#questionEditForm').data('bootstrapValidator').isValid()) 
-        {
+	function pageSave(questionType) {
+		$('#questionEditForm').bootstrapValidator('validate');
+		if (true == $('#questionEditForm').data('bootstrapValidator').isValid()) {
+			//alert('aaa');
+			$('#myModal').modal('hide');
 			myPost('questionEdit?questionType=' + questionType, 'questionEditForm', 'questionList')
 		}
 	}
