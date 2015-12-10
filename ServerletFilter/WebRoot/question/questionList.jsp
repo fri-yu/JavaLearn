@@ -1,6 +1,4 @@
-<%@ page language="java"
-	import="java.util.*,com.demo.util.*,com.demo.viewModel.QuestionListModel"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.demo.util.*,com.demo.viewModel.QuestionListModel" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -18,23 +16,19 @@
 <form class="form-inline" id="queryFormQuestion">
 	<div class="row">
 		<div class="col-md-3 text-center">
-			<label for="questionTypeSel">题型：</label> <select class="form-control"
-				style="width:60%;" id="questionTypeSel"
+			<label for="questionTypeSel">题型：</label> <select class="form-control" style="width:60%;" id="questionTypeSel"
 				onchange="questionTypeChange(this.value)">
 				<%
 					for (EQuestionType st : EQuestionType.values()) {
 				%>
-				<option value="<%=st.getKey()%>"
-					<%if(questionType.equals(st.getKey())) out.print("selected='selected'");%>><%=st.getValue()%></option>
+				<option value="<%=st.getKey()%>" <%if(questionType.equals(st.getKey())) out.print("selected='selected'");%>><%=st.getValue()%></option>
 				<%
 					}
 				%>
-			</select> <input type="hidden" value='<%=model.getSelectQuestionType()%>'
-				id="questionType" name="questionType" />
+			</select> <input type="hidden" value='<%=model.getSelectQuestionType()%>' id="questionType" name="questionType" />
 		</div>
 		<div class="col-md-3 text-center">
-			<label for="difficultPointySel">难度：</label> <select
-				class="form-control" style="width:60%;" id="difficultyPointSel"
+			<label for="difficultPointySel">难度：</label> <select class="form-control" style="width:60%;" id="difficultyPointSel"
 				onchange="difficultyPointChange(this.value)">
 				<option value="12345">请选择</option>
 				<%
@@ -45,8 +39,7 @@
 				<%
 					}
 				%>
-			</select> <input type="hidden" value='<%=selectDiffcultyPoint%>'
-				id="difficultyPoint" name="difficultyPoint" />
+			</select> <input type="hidden" value='<%=selectDiffcultyPoint%>' id="difficultyPoint" name="difficultyPoint" />
 		</div>
 
 		<div class="col-md-1 text-center">
@@ -57,6 +50,25 @@
 		</div>
 	</div>
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			</div>
+			<div class="modal-body" id="modelContent">...</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 <%
 	if (questionType.equals(EQuestionType.QChoice.getKey())) {
 %>
@@ -95,8 +107,10 @@ $("a").click(function(e) {
 	function addQuestion(){
 		var params = serializeForm('queryFormQuestion');
 		pageLoadData("questionEdit?" + params+"&id=-1");
+		$("#myModal").modal();
 	}
 	function pageLoadData(urlPart){
-		loadDataByGet("<%=basePath%>" + urlPart,"questionList");
+		loadDataByGet("<%=basePath%>" + urlPart, "modelContent");
 	}
+	
 </script>
