@@ -102,4 +102,8 @@ $("a").click(function(e) {
 			myPost('questionEdit?questionType=' + questionType, 'questionEditForm', 'questionList')
 		}
 	}
+	function difficultyPointChange(str) {
+	alert(str);
+		$("#difficultyPoint").val(str);
+	}
 </script>

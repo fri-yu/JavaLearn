@@ -1,3 +1,4 @@
+<%@page import="com.demo.util.EQuestionAnswer"%>
 <%@page import="com.demo.domain.QuestionTrueorfalse"%>
 <%@page import="com.demo.viewModel.QuestionListModel"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
@@ -16,6 +17,7 @@
 	<table class="table table-striped table-bordered">
 		<tr>
 			<td>题干</td>
+			<td>答案</td>
 			<td>难度系数</td>
 			<td>操作</td>
 		</tr>
@@ -25,6 +27,9 @@
 		%>
 		<tr>
 			<td><%=q.getContent()%></td>
+			<td><%if(q.getAnswer().equals(EQuestionAnswer.write.getKey())) out.print(EQuestionAnswer.write.getValue());
+			else if(q.getAnswer().equals(EQuestionAnswer.wrong.getKey())) out.print(EQuestionAnswer.wrong.getValue());
+			%></td>
 			<td><%=q.getDifficultyPoint()%></td>
 			<td><a href='#' onclick="myLoad('userEdit?cid=<%=q.getHiloId()%>')">编辑</a>| <a href='#'
 				onclick="del('userDel?cid=<%=q.getHiloId()%>');">删除</a>
