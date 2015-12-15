@@ -47,7 +47,7 @@ public class PaperList extends HttpServlet {
 		String queryString = "";
 		// 查询结果
 		List<Paper> paperList = new ArrayList<Paper>();
-		int pageCount = PaperService.getList(pageSize, currentPage, paperList,
+		int pageCount = PaperService.getPagerList(pageSize, currentPage, paperList,
 				"Paper", "", null);
 		// 初始化页面模型
 		PaperListModel model = new PaperListModel();

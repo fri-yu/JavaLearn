@@ -13,9 +13,9 @@ import com.demo.util.HibernateUtil;
 
 public class BaseService {
 
-	public static int getList(int pageSize, int currentPage, List modelList,
+	public static int getPagerList(int pageSize, int currentPage, List modelList,
 			String tableName, String hqlWhere, List<String> params) {
-		Session session = HibernateUtil.openSession();
+		Session session = HibernateUtil.getCurrentSession();
 
 		Query queryCount = session.createQuery(" select count(*) from "
 				+ tableName + " where 1=1 " + hqlWhere);
@@ -37,16 +37,22 @@ public class BaseService {
 			}
 		}
 		modelList.addAll(query.list());
-		try {
-			session.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			closeSession(session);
-		}
+		
 		return pageCount;
 	}
 
+	public static Object getList(String tableName, String hqlWhere, List<String> params)
+	{
+		Session session = HibernateUtil.getCurrentSession();
+		Query query = session
+				.createQuery(" from " + tableName + " where 1=1 " + hqlWhere);
+		if (params != null && params.size() > 0) {
+			for (int i = 0; i < params.size(); i++) {
+				query.setParameter(i, params.get(i));
+			}
+		}
+		return query.list();
+	}
 	public static Object getObject(Class clst, Serializable id) {
 		Object object = null;
 		Session session = HibernateUtil.getCurrentSession();

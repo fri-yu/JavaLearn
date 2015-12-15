@@ -19,6 +19,7 @@ import com.demo.service.BaseService;
 import com.demo.util.EQuestionType;
 import com.demo.util.PagerUtil;
 import com.demo.viewModel.QuestionListModel;
+import com.demo.viewModel.ShortAnswerQuestionModel;
 
 public class QuestionList extends HttpServlet {
 
@@ -48,17 +49,18 @@ public class QuestionList extends HttpServlet {
 		model.setSelectQuestionType(questionType);
 		// 查询参数
 		queryString = "&questionType=" + questionType;
-		String selectDiffcultyPoint="";
+		String selectDiffcultyPoint = "";
 		String sqlWhere = "";
 		List<String> params = new ArrayList<String>();
 		if (null != req.getParameter("difficultyPoint")
 				&& !"".equals(req.getParameter("difficultyPoint").trim())) {
 			selectDiffcultyPoint = req.getParameter("difficultyPoint").trim();
 			sqlWhere = " and difficultyPoint=? ";
-			queryString+=" &difficultyPoint="+selectDiffcultyPoint;
+			queryString += " &difficultyPoint=" + selectDiffcultyPoint;
 			params.add(selectDiffcultyPoint);
-			
+
 		}
+		sqlWhere += " Order by hiloid desc";
 		// 分页参数
 		int pageCount = 0;
 		int pageSize = req.getParameter("pageSize") == null ? 5 : Integer
@@ -69,7 +71,7 @@ public class QuestionList extends HttpServlet {
 			// 选择题
 			if (questionType.equals(EQuestionType.QChoice.getKey())) {
 				List<QuestionChoice> cList = new ArrayList<QuestionChoice>();
-				pageCount = BaseService.getList(pageSize, currentPage, cList,
+				pageCount = BaseService.getPagerList(pageSize, currentPage, cList,
 						" QuestionChoice ", sqlWhere, params);
 				model.setqCList(cList);
 
@@ -77,23 +79,39 @@ public class QuestionList extends HttpServlet {
 			// 填空题
 			else if (questionType.equals(EQuestionType.QCompletion.getKey())) {
 				List<QuestionCompletion> cList = new ArrayList<QuestionCompletion>();
-				pageCount = BaseService.getList(pageSize, currentPage, cList,
+				pageCount = BaseService.getPagerList(pageSize, currentPage, cList,
 						" QuestionCompletion ", sqlWhere, params);
 				model.setqComList(cList);
 			}
 			// 判断题
 			else if (questionType.equals(EQuestionType.QTrueOrFalse.getKey())) {
 				List<QuestionTrueorfalse> cList = new ArrayList<QuestionTrueorfalse>();
-				pageCount = BaseService.getList(pageSize, currentPage, cList,
+				pageCount = BaseService.getPagerList(pageSize, currentPage, cList,
 						" QuestionTrueorfalse ", sqlWhere, params);
 				model.setqTList(cList);
 			}
-			// 简单题
+			// 简答题
 			else if (questionType.equals(EQuestionType.QSAQ.getKey())) {
 				List<QuestionShortanswer> cList = new ArrayList<QuestionShortanswer>();
-				pageCount = BaseService.getList(pageSize, currentPage, cList,
+				pageCount = BaseService.getPagerList(pageSize, currentPage, cList,
 						" QuestionShortanswer ", sqlWhere, params);
-				// model.setsAQList(cList);
+				sqlWhere = "";
+				if (cList.size() > 0) {
+					StringBuilder sBuilder = new StringBuilder();
+					sBuilder.append(" (");
+					for (QuestionShortanswer saq : cList) {
+
+						sBuilder.append(saq.getHiloId() + ", ");
+					}
+					sBuilder.setLength(sBuilder.length());
+					sBuilder.append(" ) ");
+					System.out
+							.println("SAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQSAQ");
+					System.out.println(sBuilder.toString());
+				}
+				List<ShortAnswerQuestionModel> mList=new 
+						ArrayList<ShortAnswerQuestionModel>();
+				 model.setsAQList(mList);
 			}
 		} else {
 			model.setSelectQuestionType("Choice");
