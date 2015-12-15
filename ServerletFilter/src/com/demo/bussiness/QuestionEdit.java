@@ -1,6 +1,8 @@
 package com.demo.bussiness;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,14 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.demo.domain.Question;
 import com.demo.domain.QuestionChoice;
 import com.demo.domain.QuestionCompletion;
+import com.demo.domain.QuestionShortanswer;
 import com.demo.domain.QuestionTrueorfalse;
 import com.demo.service.BaseService;
 import com.demo.service.PaperService;
 import com.demo.service.UserService;
 import com.demo.util.EDataOption;
 import com.demo.util.EQuestionType;
+import com.demo.viewModel.ShortAnswerQuestionModel;
 
 public class QuestionEdit extends HttpServlet {
 
@@ -51,15 +56,15 @@ public class QuestionEdit extends HttpServlet {
 			return false;
 
 		Object model = getQuestionChoiceModel(req);
-		//选择题
+		// 选择题
 		if (questionType.equals(EQuestionType.QChoice.getKey())) {
 			model = getQuestionChoiceModel(req);
 		}
 		// 填空题
 		else if (questionType.equals(EQuestionType.QCompletion.getKey())) {
-			//System.out.println("初始化填空题");
+			// System.out.println("初始化填空题");
 			model = getQuestionCompletionModel(req);
-			
+
 		}
 		// 判断题
 		else if (questionType.equals(EQuestionType.QTrueOrFalse.getKey())) {
@@ -67,7 +72,7 @@ public class QuestionEdit extends HttpServlet {
 		}
 		// 简答题
 		else if (questionType.equals(EQuestionType.QSAQ.getKey())) {
-			model = getQuestionChoiceModel(req);
+			model = getQuestionSAQModel(req);
 		}
 		// 数据保存
 		boolean dataOptionResult = false;
@@ -79,6 +84,12 @@ public class QuestionEdit extends HttpServlet {
 			dataOptionResult = BaseService.updateOrSave(model,
 					EDataOption.update);
 		return dataOptionResult;
+	}
+
+	private Object getQuestionSAQModel(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		ShortAnswerQuestionModel shortAnswerQuestionModel = new ShortAnswerQuestionModel();
+		return null;
 	}
 
 	private Object getQuestionTrueOrFalseModel(HttpServletRequest req) {
@@ -182,6 +193,20 @@ public class QuestionEdit extends HttpServlet {
 			else if (questionType.equals(EQuestionType.QSAQ.getKey())) {
 				// object=PaperService.getObject(QuestionTrueorfalse.class,
 				// hiloId);
+				QuestionShortanswer questionShortanswer=new QuestionShortanswer();
+				if (hiloId != -1) {
+					
+					questionShortanswer= (QuestionShortanswer)PaperService.getObject(QuestionShortanswer.class,
+							hiloId);
+					List<Question> qList=(List<Question>)PaperService.getList(" Question ","",null);
+				} else
+					object = new ShortAnswerQuestionModel(
+							questionShortanswer,
+							(List<Question>) new ArrayList<Question>() {
+								{
+									add(new Question());
+								}
+							});
 			}
 		} else {
 			object = PaperService.getObject(QuestionChoice.class, hiloId);
