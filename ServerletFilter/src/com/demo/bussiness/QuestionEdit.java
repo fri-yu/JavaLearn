@@ -50,6 +50,12 @@ public class QuestionEdit extends HttpServlet {
 
 	}
 
+	/**
+	 * 前台POST保存数据处理
+	 * 
+	 * @param req
+	 * @return
+	 */
 	private boolean postHandler(HttpServletRequest req) {
 		String questionType = req.getParameter("questionType").trim();
 		if (null == questionType)
@@ -86,12 +92,23 @@ public class QuestionEdit extends HttpServlet {
 		return dataOptionResult;
 	}
 
+	/**
+	 * 
+	 * @param req
+	 * @return
+	 */
 	private Object getQuestionSAQModel(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		ShortAnswerQuestionModel shortAnswerQuestionModel = new ShortAnswerQuestionModel();
 		return null;
 	}
 
+	/**
+	 * 根据request获取判断题对象
+	 * 
+	 * @param req
+	 * @return
+	 */
 	private Object getQuestionTrueOrFalseModel(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		QuestionTrueorfalse questionTrueorfalse = new QuestionTrueorfalse();
@@ -105,6 +122,12 @@ public class QuestionEdit extends HttpServlet {
 		return questionTrueorfalse;
 	}
 
+	/**
+	 * 根据request获取填空题对象
+	 * 
+	 * @param req
+	 * @return
+	 */
 	private Object getQuestionCompletionModel(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		QuestionCompletion questionCompletion = new QuestionCompletion();
@@ -118,6 +141,12 @@ public class QuestionEdit extends HttpServlet {
 		return questionCompletion;
 	}
 
+	/**
+	 * 根据request获取选择题对象
+	 * 
+	 * @param req
+	 * @return
+	 */
 	private QuestionChoice getQuestionChoiceModel(HttpServletRequest req) {
 		QuestionChoice questionChoice = new QuestionChoice();
 		questionChoice.setHiloId(Integer.parseInt(req.getParameter("hiloId")));
@@ -133,6 +162,12 @@ public class QuestionEdit extends HttpServlet {
 		return questionChoice;
 	}
 
+	/**
+	 * 根据request获取RequestDispatcher对象
+	 * 
+	 * @param req
+	 * @return
+	 */
 	private RequestDispatcher getDispatcher(HttpServletRequest req) {
 		String questionType = req.getParameter("questionType") == null ? EQuestionType.QChoice
 				.getKey() : req.getParameter("questionType").trim();
@@ -157,6 +192,12 @@ public class QuestionEdit extends HttpServlet {
 		return req.getRequestDispatcher("/question/questionErr.jsp");
 	}
 
+	/**
+	 * 根据request获取试题对象
+	 * 
+	 * @param req
+	 * @return
+	 */
 	private Object GetModel(HttpServletRequest req) {
 		Object object = null;
 		String questionType = req.getParameter("questionType") == null ? EQuestionType.QChoice
@@ -193,20 +234,16 @@ public class QuestionEdit extends HttpServlet {
 			else if (questionType.equals(EQuestionType.QSAQ.getKey())) {
 				// object=PaperService.getObject(QuestionTrueorfalse.class,
 				// hiloId);
-				QuestionShortanswer questionShortanswer=new QuestionShortanswer();
+				QuestionShortanswer questionShortanswer = new QuestionShortanswer();
 				if (hiloId != -1) {
-					
-					questionShortanswer= (QuestionShortanswer)PaperService.getObject(QuestionShortanswer.class,
-							hiloId);
-					List<Question> qList=(List<Question>)PaperService.getList(" Question ","",null);
+
+					questionShortanswer = (QuestionShortanswer) PaperService
+							.getObject(QuestionShortanswer.class, hiloId);
+					List<Question> qList = (List<Question>) PaperService
+							.getList(" Question ", "", null);
 				} else
-					object = new ShortAnswerQuestionModel(
-							questionShortanswer,
-							(List<Question>) new ArrayList<Question>() {
-								{
-									add(new Question());
-								}
-							});
+					object = new ShortAnswerQuestionModel(questionShortanswer,
+							(List<Question>) new ArrayList<Question>());
 			}
 		} else {
 			object = PaperService.getObject(QuestionChoice.class, hiloId);

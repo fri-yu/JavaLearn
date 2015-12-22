@@ -6,16 +6,19 @@
 -->
 <hibernate-mapping>
     <class name="com.demo.domain.Question" table="question" catalog="test">
-        <composite-id name="id" class="com.demo.domain.QuestionId">
-            <key-property name="id" type="java.lang.Integer">
-                <column name="ID" />
-            </key-property>
-            <key-property name="content" type="java.lang.String">
-                <column name="content" length="500" />
-            </key-property>
-            <key-property name="answer" type="java.lang.String">
-                <column name="answer" length="500" />
-            </key-property>
-        </composite-id>
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="content" type="java.lang.String">
+            <column name="content" length="500" not-null="true">
+                <comment>题干</comment>
+            </column>
+        </property>
+        <property name="answer" type="java.lang.String">
+            <column name="answer" length="500" not-null="true">
+                <comment>答案</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

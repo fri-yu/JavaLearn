@@ -8,7 +8,9 @@ public class Question implements java.io.Serializable {
 
 	// Fields
 
-	private QuestionId id;
+	private Integer id;
+	private String content;
+	private String answer;
 
 	// Constructors
 
@@ -17,18 +19,35 @@ public class Question implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Question(QuestionId id) {
-		this.id = id;
+	public Question(String content, String answer) {
+		this.content = content;
+		this.answer = answer;
 	}
 
 	// Property accessors
 
-	public QuestionId getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(QuestionId id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getAnswer() {
+		return this.answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 }

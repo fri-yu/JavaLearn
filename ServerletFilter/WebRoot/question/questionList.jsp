@@ -88,11 +88,15 @@ $("a").click(function(e) {
 	}
 	function addQuestion(){
 		var params = serializeForm('queryFormQuestion');
-		pageLoadData("questionEdit?" + params+"&id=-1");
+		pageLoadData("questionEdit?" + params+"&hiloId=-1");
 		$("#myModal").modal();
 	}
 	function pageLoadData(urlPart){
-		loadDataByGet("<%=basePath%>" + urlPart, "modelContent");
+		loadDataByGet("<%=basePath%>" + urlPart, "myModal");
+	}
+	function editQuestion(url) {
+		pageLoadData(url);
+		$("#myModal").modal();
 	}
 	function pageSave(questionType) {
 		$('#questionEditForm').bootstrapValidator('validate');
@@ -103,7 +107,7 @@ $("a").click(function(e) {
 		}
 	}
 	function difficultyPointChange(str) {
-	alert(str);
+		alert(str);
 		$("#difficultyPoint").val(str);
 	}
 </script>

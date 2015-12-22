@@ -1,3 +1,4 @@
+<%@page import="com.demo.util.EQuestionType"%>
 <%@page import="com.demo.domain.QuestionCompletion"%>
 <%@page import="com.demo.viewModel.QuestionListModel"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
@@ -26,8 +27,8 @@
 		<tr>
 			<td><%=q.getContent()%></td>
 			<td><%=q.getDifficultyPoint()%></td>
-			<td><a href='#' onclick="myLoad('userEdit?cid=<%=q.getHiloId()%>')">编辑</a>| <a href='#'
-				onclick="del('userDel?cid=<%=q.getHiloId()%>');">删除</a></td>
+			<td><a href='#' onclick="editQuestion('questionEdit?questionType=<%=EQuestionType.QCompletion.getKey() %>&hiloId=<%=q.getHiloId()%>')">编辑</a>| <a href='#'
+				onclick="del('userDel?hiloId=<%=q.getHiloId()%>');">删除</a></td>
 		</tr>
 		<%
 			}

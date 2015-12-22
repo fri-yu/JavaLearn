@@ -7,17 +7,11 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="dialect">
-			org.hibernate.dialect.MySQLDialect
-		</property>
-		<property name="connection.url">
-			jdbc:mysql://127.0.0.1:3306/test
-		</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="connection.url">jdbc:mysql://127.0.0.1:3306/test</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">mysql5177</property>
-		<property name="connection.driver_class">
-			com.mysql.jdbc.Driver
-		</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="myeclipse.connection.profile">mySql</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
@@ -28,8 +22,7 @@
 		<mapping resource="com/demo/domain/QuestionShortanswer.hbm.xml" />
 		<mapping resource="com/demo/domain/QuestionTrueorfalse.hbm.xml" />
 		<mapping resource="com/demo/domain/Question.hbm.xml" />
-		<mapping
-			resource="com/demo/domain/QuestionrsShortanswer.hbm.xml" />
+		<mapping resource="com/demo/domain/QuestionrsShortanswer.hbm.xml" />
 
 	</session-factory>
 

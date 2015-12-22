@@ -20,18 +20,22 @@ public class Test {
 		// method(arr);
 		// System.out.println(arr.hashCode());
 		// MyRegex_3("");
-		AddData();
-//		for(EQuestionType st:EQuestionType.values())
-//		{
-//			System.out.println(st.getValue());
-//			
-//		}
+		// AddData();
+		// Long x=100L;//Long与Integer都将 -128~127 这些对象缓存了。
+		// Long y=100L;//Long与Integer都将 -128~127 这些对象缓存了。
+		// System.out.println(x==y);
+		// System.out.println(x.equals(y));
+		// for(EQuestionType st:EQuestionType.values())
+		// {
+		// System.out.println(st.getValue());
+		//
+		// }
 	}
 
 	private static void AddData() {
 		Session session = HibernateUtil.getCurrentSession();
 		QuestionChoice cq = new QuestionChoice();
-		//cq.setHiloId(234);
+		// cq.setHiloId(234);
 		cq.setContent("哪个不是编译型语言");
 		cq.setOptionA("java");
 		cq.setOptionB("C#");
@@ -41,7 +45,7 @@ public class Test {
 		cq.setDifficultyPoint(EDifficultyPoint.Point9.getValue());
 		session.beginTransaction();
 		session.save(cq);
-		QuestionCompletion qc=new QuestionCompletion();
+		QuestionCompletion qc = new QuestionCompletion();
 		qc.setContent(".NET不用主动释放内存是因为()");
 		qc.setAnswer("GC|垃圾回收机制");
 		qc.setDifficultyPoint(EDifficultyPoint.Point8.getValue());
