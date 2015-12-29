@@ -8,6 +8,11 @@
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <base href="<%=basePath%>">
+<% 
+Cookie cookies[]=request.getCookies(); 
+Cookie sCookie=null; 
+String backUrl=request.getAttribute("backUrl").toString();
+%>
 <%
 	ShortAnswerQuestionModel model = (ShortAnswerQuestionModel) request
 	.getAttribute("model");
@@ -16,9 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="modal-content">
 		<form class="form-horizontal" id="questionEditForm">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				
 				<h4 class="modal-title" id="myModalLabel">添加简答题</h4>
 			</div>
 			<div class="modal-body" id="modelContent">
@@ -81,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="modal-footer">
 				<input type="hidden" name="hiloId" value="<%=request.getAttribute("hiloId")%>" /> <input type="hidden"
 					name="questionType" value="<%=request.getAttribute("questionType")%>" />
-				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-default" onclick="myRet()">返回</button>
 				<button type="button" class="btn btn-primary" onclick="pageSave('<%=EQuestionType.QSAQ.getKey()%>')">保存</button>
 			</div>
 		</form>
@@ -122,5 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('#defaultForm').data('bootstrapValidator').resetForm(true);
 		});
 	});
+	function myRet(){
+		loadDataByGet('<%=backUrl%>', "questionList");
+	}
 </script>
 

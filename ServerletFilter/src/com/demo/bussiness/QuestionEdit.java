@@ -35,6 +35,8 @@ public class QuestionEdit extends HttpServlet {
 		Integer hiloId = req.getParameter("hiloId") == null ? -1 : Integer
 				.parseInt(req.getParameter("hiloId").trim());
 		req.setAttribute("hiloId", hiloId);
+		req.setAttribute("backUrl", req.getParameter("backUrl"));
+		//System.out.println("backUrl-------------------------------"+req.getAttribute("backUrl"));
 		RequestDispatcher dispatcher = getDispatcher(req);
 		dispatcher.forward(req, resp);
 	}

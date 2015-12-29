@@ -40,6 +40,7 @@
 					}
 				%>
 			</select> <input type="hidden" value='<%=selectDiffcultyPoint%>' id="difficultyPoint" name="difficultyPoint" />
+			<input type="hidden" value='<%=request.getAttribute("backUrl")%>' id="backUrl" name="backUrl" />
 		</div>
 
 		<div class="col-md-1 text-center">
@@ -88,14 +89,22 @@ $("a").click(function(e) {
 	}
 	function addQuestion(){
 		var params = serializeForm('queryFormQuestion');
-		pageLoadData("questionEdit?" + params+"&hiloId=-1");
-		$("#myModal").modal();
+		var urlPart="questionEdit?" + params+"&hiloId=-1";
+		if($('#questionType').val()=='<%=EQuestionType.QSAQ.getKey()%>'){
+			//alert(12345);
+			loadDataByGet("<%=basePath%>" + urlPart, "questionList");
+		}
+		else{
+			paperLoadData(urlPart);
+			$("#myModal").modal();
+		}
 	}
-	function pageLoadData(urlPart){
-		loadDataByGet("<%=basePath%>" + urlPart, "myModal");
+	function paperLoadData(urlPart){
+		var url="<%=basePath%>" + urlPart;
+		loadDataByGet(url, "myModal");
 	}
 	function editQuestion(url) {
-		pageLoadData(url);
+		paperLoadData(url);
 		$("#myModal").modal();
 	}
 	function pageSave(questionType) {
