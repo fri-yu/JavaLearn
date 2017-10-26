@@ -1,3 +1,5 @@
 /Test/*.class
 *.bak
 *.class
+.idea/
+designPatterns/designPatterns.iml
