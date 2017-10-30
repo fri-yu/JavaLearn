@@ -3,3 +3,4 @@
 *.class
 .idea/
 designPatterns/designPatterns.iml
+*.iml
